@@ -54,16 +54,16 @@ following criteria:
 ### Phase 3: Create Reviews Backend and Review Form (1.5 day)
 **Objective** Allow users to create reviews and show those reviews on the corresponding restaurant pages
 
-## Phase 4: Implement Searching (1.5 days)
+### Phase 4: Implement Searching (1.5 days)
 **Objective** Allow users to search for restaurants using types and features
 
-## Phase 5: Implement Google Maps (1 day)
+### Phase 5: Implement Google Maps (1 day)
 **Objective** Render a map showing either all the near by restaurants matching a search result or where a restaurant is on its show page.
 
-## Phase 6: Support Searching by distance radii (.5 days)
+### Phase 6: Support Searching by distance radii (.5 days)
 **Objective** Allow a user to search for restaurants within a radii of their current location
 
-## Bonus Features (TBD):
+### Bonus Features (TBD):
 - [ ] Mark Reviews as helpful or unhelpful
   **Objective** Allow Reviews to be marked as helpful/unhelpful by users and change display logic to display the most helpful reviews first and then by most recent.
 - [ ] Users Show Page
