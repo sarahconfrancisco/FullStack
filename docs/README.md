@@ -2,7 +2,7 @@
 
 [Trello link][trello]
 
-[trello]: https://trello.com/b/ALgfuX0Q/freshernote
+[trello]: https://trello.com/b/Vz8gFczW/welp
 
 ## Minimum Viable Product
 
