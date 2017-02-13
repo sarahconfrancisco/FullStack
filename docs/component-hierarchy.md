@@ -26,9 +26,13 @@
 
 **RestaurantContainer**
  - RestaurantDetail
+ - PhotoIndexContainer
  - MapContainer
  - ReviewIndexContainer
  - ReviewFormContainer
+
+**PhotoIndexContainer**
+ - PhotoIndexItem
 
 **ReviewFormContainer**
  - ReviewForm
@@ -53,5 +57,6 @@
  | "/signin" | "SessionFormContainer" |
  | "/search"  | "SearchFormContainer"|
  | "/restaurants/:id" | "RestaurantContainer" |
- | "/restaurants/:id/review"| "ReviewFormContainer"|
- | "/newrestaurant" | "RestaurantContainer" |
+ | "/restaurants/:id/review" | "ReviewFormContainer"|
+ | "/restaurants/:id/photos" | "PhotoIndexContainer"|
+ | "/newrestaurant" | "RestaurantForm" |
