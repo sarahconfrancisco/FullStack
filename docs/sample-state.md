@@ -7,7 +7,8 @@ state when searching:
   currentUser: {
     id: 1,
     fname: "sarah",
-    lname: "confrancisco"
+    lname: "confrancisco",
+    zip: 07481
   },
 
   restaurants: {
@@ -103,7 +104,8 @@ state on a restaurant show page:
   currentUser: {
     id: 1,
     fname: "sarah",
-    lname: "confrancisco"
+    lname: "confrancisco",
+    zip: 07481
   },
 
   restaurants: {
