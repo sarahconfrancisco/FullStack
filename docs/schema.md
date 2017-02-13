@@ -26,6 +26,8 @@ address      | string    | not null
 city         | string    | not null
 state        | string    | not null
 zip          | integer   | not null, indexed
+longitude    | float     | not null
+latitude     | float     | not null
 phone        | integer   | not null
 website      | string    |
 hours        | text      | not null
