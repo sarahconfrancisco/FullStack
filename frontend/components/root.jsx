@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 // react router
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
-// import App from './app';
+import App from './app';
 import SessionFormContainer from './session/session_form_container';
 
 const Root = (props) => {
