@@ -108,7 +108,6 @@ class SessionForm extends React.Component{
           <input className="full-input" type="text" value={this.state.zip} placeholder="ZIP Code" onChange={this.update('zip').bind(this)}/>
           <br />
           <label>Birthday(Optional)</label>
-          <br />
           <ul className="birthday">
             <li>
               {months}

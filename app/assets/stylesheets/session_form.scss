@@ -6,13 +6,11 @@
 .birthday > li > select {
   display: inline;
   width: 100px;
-  height: 20px;
-  padding: 2px;
+  margin: 1px;
 }
 
 .full-input {
   width: 300px;
-  height: 20px;
 }
 
 .half-input {
@@ -22,7 +20,7 @@
 
 .half-input > input {
   width: 153px;
-  height: 20px;
+  padding-right: 2px;
   display: inline;
 }
 
@@ -31,7 +29,11 @@
   margin-right: 50px;
   margin-bottom: 100px;
   margin-top: 50px;
-  width: 300px;
+  width: 306px;
+}
+
+.session-form > input, .session-form > div > input, .session-form > div > ul > li > select {
+  height: 30px;
 }
 
 .full-input, .half-input > input {
