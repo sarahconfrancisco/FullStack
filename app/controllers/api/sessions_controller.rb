@@ -1,3 +1,4 @@
+
 class Api::SessionsController < ApplicationController
 
   def create
@@ -19,6 +20,6 @@ class Api::SessionsController < ApplicationController
       render json: ["Nobody is signed in"],
       status: 404
     end
-
+    
   end
 end

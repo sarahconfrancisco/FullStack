@@ -1,6 +1,5 @@
 import { RECEIVE_ERRORS } from '../actions/error_actions';
 
-import { merge } from 'lodash';
 
 const ErrorReducer = (oldState = {}, action) => {
   switch(action.type){

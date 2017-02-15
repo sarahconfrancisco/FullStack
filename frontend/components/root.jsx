@@ -7,6 +7,7 @@ import App from './app';
 import SessionFormContainer from './session/session_form_container';
 
 
+
 const Root = (props) => {
 
   return(
