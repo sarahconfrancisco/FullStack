@@ -12,6 +12,18 @@ class SessionForm extends React.Component{
       }
     }
 
+  componentWillReceiveProps(nextProps){
+    if(nextProps.loggedIn){
+      this.props.router.push("/");
+    }
+  }
+
+  componentDidMount(){
+    if(this.props.loggedIn){
+      this.props.router.push("/");
+    }
+  }
+
   update(field){
     return ((e) => this.setState({[field]: e.target.value}));
   }
@@ -23,9 +35,7 @@ class SessionForm extends React.Component{
       user.birthday = this.state.month + "/" + this.state.day + "/" + this.state.year;
     }
     this.props.processForm({user});
-    if(this.props.loggedIn){
-      this.props.router.push("/");
-    }
+
   }
 
   generateMonths(){
@@ -82,7 +92,7 @@ class SessionForm extends React.Component{
     let title;
     if (this.props.formType === "signup"){
       name = (
-        <div>
+        <div className="half-input">
           <input type="text" placeholder="First Name" value={this.state.fname} onChange={this.update('fname').bind(this)} />
           <input type="text" value={this.state.lname} placeholder="Last Name" onChange={this.update('lname').bind(this)} />
         </div>
@@ -95,7 +105,7 @@ class SessionForm extends React.Component{
       )
       zip_birthday = (
         <div>
-          <input type="text" value={this.state.zip} placeholder="ZIP Code" onChange={this.update('zip').bind(this)}/>
+          <input className="full-input" type="text" value={this.state.zip} placeholder="ZIP Code" onChange={this.update('zip').bind(this)}/>
           <br />
           <label>Birthday(Optional)</label>
           <br />
@@ -121,17 +131,17 @@ class SessionForm extends React.Component{
       )
     }
     return(
-      <form>
+      <form className="session-form">
         {title}
+        <br />
         {name}
+        <input className="full-input" type="text" placeholder="Email" value={this.state.email} onChange={this.update('email').bind(this)}/>
         <br />
-        <input type="text" placeholder="Email" value={this.state.email} onChange={this.update('email').bind(this)}/>
-        <br />
-        <input type="password" placeholder="Password (minimum 6 characters)" onChange={this.update('password').bind(this)} value={this.state.password} />
+        <input className="full-input" type="password" placeholder="Password (minimum 6 characters)" onChange={this.update('password').bind(this)} value={this.state.password} />
         <br />
         {zip_birthday}
         <br />
-        <input type="submit"value={this.props.formType} onClick={this.handleSubmit.bind(this)}/>
+        <input className="full-input" type="submit"value={this.props.formType} onClick={this.handleSubmit.bind(this)}/>
       </form>
     );
   }

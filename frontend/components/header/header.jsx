@@ -40,7 +40,11 @@ class Header extends React.Component {
 
   render(){
     return(
-      (this.props.currentUser && this.props.currentUser.id) ? this.personalGreeting() : this.sessionLinks()
+      <div className="header">
+        <Link>Add a Restaurant</Link>
+        <span id="logo">Welp!</span>
+        {(this.props.currentUser && this.props.currentUser.id) ? this.personalGreeting() : this.sessionLinks()}
+      </div>
     );
   };
 }

@@ -13,7 +13,6 @@ render()
     <div>
       <HeaderContainer />
       <ErrorContainer route={this.props.router.location.pathname}/>
-      Welp!
       {this.props.children}
       <Footer />
     </div>
