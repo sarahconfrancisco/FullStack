@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :restaurants
   attr_reader :password
 
   def password=(password)

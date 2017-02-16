@@ -4,12 +4,24 @@ const Footer = (props) => {
   return(
     <div className="footer">
       <ul>
-        <li className="about-me">About Me</li>
+
+        <li>
+          <ul>
+            <li className="about-me">About Me</li>
+          </ul>
+        </li>
+
+      <li>      
+        <ul>
+          <li className="my-links">My Links</li>
+        </ul>
+      </li>
+
       </ul>
 
-      <ul>
-        <li className="my-links">My Links</li>
-      </ul>
+      <div className="picture-container">
+        <img src={window.images.cityscape} />
+      </div>
     </div>
   )
 }

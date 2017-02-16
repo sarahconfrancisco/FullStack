@@ -1,6 +1,6 @@
 
 html, body, div, span,
-h1, h2, h3, h4, h5, h6, p, blockquote,
+h1, h2, h3, h4, h5, h6, p, blockquote, ul, ol,
 a, img {
   margin: 0;
   padding: 0;
@@ -19,7 +19,7 @@ body {
   line-height: 1;
   color: black;
   background: white;
-  font-family: sans-serif;
+  font-family: Arial;
 }
 ol, ul {
   list-style: none;
@@ -38,6 +38,13 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+input, select {
+  background: #FAFAFA;
+  border-radius: 3px;
+  border: 1px solid #bbb;
+  font-size: 14px;
 }
 
 .small-logo {

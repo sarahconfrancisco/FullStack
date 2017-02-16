@@ -4,7 +4,7 @@
   margin-bottom: 200px;
 }
 
-.title{
+.title {
   justify-content: center;
 }
 
@@ -16,7 +16,14 @@
 
 
 .title > h4 {
-  color: #D32338
+  font-size: 22px;
+  color: #D32338;
+  line-height: 1.28571em;
+}
+
+.title > h6 {
+  margin-bottom: 12px;
+  font-size: 14px;
 }
 
 .picture-container {
@@ -30,61 +37,99 @@
 
 .birthday {
   display: flex;
-  justify-content: flex-end;
-  margin: 2px;
+  justify-content: space-between;
+  margin: 2px 0;
+  padding: 0;
+  width: 312px;
 }
 
 .birthday > li > select {
-  display: inline;
-  width: 100px;
-  margin-left: 0px;
-  margin: 1px;
+  width: 96px;
+  margin: 0px;
+  height: 28px;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.15);
+
 }
+
 
 .full-input {
   width: 300px;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.15);
 }
 
 .half-input {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  width: 312px;
 }
 
 .half-input > input {
-  width: 153px;
-  padding-right: 2px;
+  width: 140px;
   display: inline;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.15);
+
 }
+
 
 .session-form {
   margin: auto;
-  width: 306px;
+  width: 312px;
 }
 
-.session-form > input, .session-form > button, .session-form > div > input, .session-form > div > ul > li > select {
-  height: 30px;
+.session-form > input {
+  height: 23px;
 }
 
 .session-form > button {
-  background-color: #D60306;
-  font-size: 100%;
+  background-color: #d90007;
+  background: linear-gradient(#d90007, #c91400);
+  font-size: 14px;
+  height: 36px;
+  border: 1px solid #8d0005;
+  font-weight: bold;
+  width: 312px;
 }
 
 .session-form > button:hover {
   background-color: #ed0008;
+  background: linear-gradient(#ed0008, #dd1600);
 }
-
 .bottom-link {
   text-align: right;
   display: block;
   width: 300px;
-  color: #666666;
+  color: #999;
+  font-size: 12px;
+  line-height: 1.5em;
+  margin-top: 9px;
+}
+
+.full-input, .half-input  > input {
+  margin: 5px 0 0 0;
+  padding: 5px;
+}
+.name-password {
+  width: 100%;
+}
+.name-password > div > input {
+  height: 18px;
+}
+
+.zip_birthday > label {
+  display: inline-block;
+  margin: 6px 0;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: left;
 }
 
 
-.full-input, .half-input > input {
-  margin-top: 2px;
-  margin-bottom: 2px;
-  padding-top: 2px;
-  padding-bottom: 2px;
+.terms {
+  font-weight: normal;
+  font-size: 12px;
+  color: #666;
+  width: 312px
+}
+.terms > a {
+  color: #0073BB
 }

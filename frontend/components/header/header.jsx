@@ -46,9 +46,11 @@ class Header extends React.Component {
   render(){
     return(
       <nav className="header">
-        <Link>
-          Add a Restaurant
-        </Link>
+        {(this.props.currentUser && this.props.currentUser.id) ?   <Link>
+          Add Your Restaurant
+          </Link>
+        : <Link></Link>}
+
         <img className="small-logo" src={window.images.logo} />
         {(this.props.currentUser && this.props.currentUser.id) ? this.personalGreeting() : this.sessionLinks()}
       </nav>

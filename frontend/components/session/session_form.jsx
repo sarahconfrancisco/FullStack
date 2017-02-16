@@ -90,7 +90,9 @@ class SessionForm extends React.Component{
     let name;
     let zip_birthday;
     let title;
+    let terms;
     let bottomLink;
+    let forgotPassword;
     if (this.props.formType === "Sign Up"){
       bottomLink = (
         <span className="bottom-link">Already on Welp? <Link to="/login">Log In</Link></span>
@@ -108,10 +110,10 @@ class SessionForm extends React.Component{
         </div>
       )
       zip_birthday = (
-        <div>
+        <div className ="zip_birthday">
           <input className="full-input" type="text" value={this.state.zip} placeholder="ZIP Code" onChange={this.update('zip').bind(this)}/>
           <br />
-          <label>Birthday(Optional)</label>
+          <label>Birthday <span className="terms">Optional</span></label>
           <ul className="birthday">
             <li>
               {months}
@@ -123,9 +125,23 @@ class SessionForm extends React.Component{
               {years}
             </li>
           </ul>
+          <br />
         </div>
       )
+
+      terms = (
+        <span className="terms"> By signing up, you agree to Welp's <a>Terms of Service</a> and <a>Privacy Policy</a>.</span>
+
+      )
     } else {
+      forgotPassword = (
+        <span className="terms bottom-link"><a>Forgot Password?</a></span>
+
+      )
+      terms = (
+        <span className="terms"> By logging in, you agree to Welp's <a>Terms of Service</a> and <a>Privacy Policy</a>.</span>
+
+      )
       bottomLink = (
         <span className="bottom-link">New to Welp? <Link to="/signup">Sign Up</Link></span>
       )
@@ -141,13 +157,17 @@ class SessionForm extends React.Component{
         <form className="session-form">
           {title}
           <br />
-          {name}
-          <input className="full-input" type="text" placeholder="Email" value={this.state.email} onChange={this.update('email').bind(this)}/>
-          <br />
-          <input className="full-input" type="password" placeholder="Password (minimum 6 characters)" onChange={this.update('password').bind(this)} value={this.state.password} />
+          <div className="name-password">
+
+            {name}
+            <input className="full-input" type="text" placeholder="Email" value={this.state.email} onChange={this.update('email').bind(this)}/>
+            <br />
+            <input className="full-input" type="password" placeholder="Password (minimum 6 characters)" onChange={this.update('password').bind(this)} value={this.state.password} />
+            {forgotPassword}
+          </div>
           <br />
           {zip_birthday}
-          <br />
+          {terms}
           <button onClick={this.handleSubmit.bind(this)} className="full-input">
             <span>{this.props.formType}</span>
           </button>

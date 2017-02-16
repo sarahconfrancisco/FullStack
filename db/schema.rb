@@ -11,10 +11,66 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170214164609) do
+ActiveRecord::Schema.define(version: 20170216203520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "restaurant_types", force: :cascade do |t|
+    t.integer  "restaurant_id", null: false
+    t.integer  "type_id",       null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "restaurant_types", ["restaurant_id", "type_id"], name: "index_restaurant_types_on_restaurant_id_and_type_id", unique: true, using: :btree
+
+  create_table "restaurants", force: :cascade do |t|
+    t.integer  "user_id",                      null: false
+    t.string   "name",                         null: false
+    t.string   "address",                      null: false
+    t.string   "city",                         null: false
+    t.string   "state",                        null: false
+    t.string   "zip",                          null: false
+    t.string   "phone",                        null: false
+    t.string   "website"
+    t.boolean  "delivery",     default: false
+    t.boolean  "pick_up",      default: false
+    t.boolean  "reservations", default: false
+    t.boolean  "parking",      default: false
+    t.boolean  "outdoor",      default: false
+    t.boolean  "credit",       default: false
+    t.boolean  "bar",          default: false
+    t.boolean  "byob",         default: false
+    t.text     "hours",                        null: false
+    t.float    "latitude",                     null: false
+    t.float    "longitude",                    null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "restaurants", ["bar"], name: "index_restaurants_on_bar", using: :btree
+  add_index "restaurants", ["byob"], name: "index_restaurants_on_byob", using: :btree
+  add_index "restaurants", ["credit"], name: "index_restaurants_on_credit", using: :btree
+  add_index "restaurants", ["delivery"], name: "index_restaurants_on_delivery", using: :btree
+  add_index "restaurants", ["hours"], name: "index_restaurants_on_hours", using: :btree
+  add_index "restaurants", ["latitude"], name: "index_restaurants_on_latitude", using: :btree
+  add_index "restaurants", ["longitude"], name: "index_restaurants_on_longitude", using: :btree
+  add_index "restaurants", ["name"], name: "index_restaurants_on_name", using: :btree
+  add_index "restaurants", ["outdoor"], name: "index_restaurants_on_outdoor", using: :btree
+  add_index "restaurants", ["parking"], name: "index_restaurants_on_parking", using: :btree
+  add_index "restaurants", ["pick_up"], name: "index_restaurants_on_pick_up", using: :btree
+  add_index "restaurants", ["reservations"], name: "index_restaurants_on_reservations", using: :btree
+  add_index "restaurants", ["user_id"], name: "index_restaurants_on_user_id", using: :btree
+  add_index "restaurants", ["zip"], name: "index_restaurants_on_zip", using: :btree
+
+  create_table "types", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "types", ["name"], name: "index_types_on_name", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "fname",           null: false

@@ -1,10 +1,26 @@
 .footer {
   background-color: #ccc;
+  height: 300px;
+}
+
+.footer > div {
   display: flex;
+  flex-direction: row;
+  align-items: flex-end;
   justify-content: center;
-  align-items: stretch;
+}
+
+.footer > .picture-container > img {
+  height: auto;
+  width: 100px;
 }
 
 .footer > ul {
+  align-items: stretch;
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer > ul > li {
   display: inline;
 }
