@@ -1,5 +1,22 @@
 .header {
   background-color: #D32323;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  margin: auto;
+  align-items: center;
+  width: 100%;
+  height: 90px;
+}
+
+.header-group > button, .login-signup > a > button, .login-signup > button {
+  background-color: #BD1F1F;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-style: none;
+  width: 100px;
+  height: 26px;
+}
+
+.login-signup > button:hover, .login-signup > a > button:hover {
+  background-color: #8d0005;
 }

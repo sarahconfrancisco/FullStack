@@ -14,10 +14,32 @@ a, img {
 }
 
 body {
+  width: 100%;
+  height: 100%;
   line-height: 1;
   color: black;
   background: white;
 }
 ol, ul {
   list-style: none;
+}
+
+button {
+  color: white;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.small-logo {
+  height: 60px;
+  width: auto;
 }

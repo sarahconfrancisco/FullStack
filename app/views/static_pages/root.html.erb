@@ -3,5 +3,10 @@
   	window.currentUser = <%= render("api/users/user.json.jbuilder",
   		user: current_user).html_safe %>
   <% end %>
+  window.images = {
+    coffee_cup: "<%= image_path("coffee-1003185_1920.jpg") %>",
+    table: "<%= image_path("table-147314.svg") %>",
+    logo: "<%= image_path("welp!-logo.png") %>"
+  }
 </script>
 <main id="root"></main>

@@ -1,11 +1,43 @@
+.session-page {
+  display: flex;
+  margin-top: 150px;
+  margin-bottom: 200px;
+}
+
+.title{
+  justify-content: center;
+}
+
+.title > h4, .title > h6{
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+}
+
+
+.title > h4 {
+  color: #D32338
+}
+
+.picture-container {
+  margin: auto;
+}
+
+.picture-container > img {
+  height: 400px;
+  width: auto;
+}
+
 .birthday {
   display: flex;
   justify-content: flex-end;
+  margin: 2px;
 }
 
 .birthday > li > select {
   display: inline;
   width: 100px;
+  margin-left: 0px;
   margin: 1px;
 }
 
@@ -25,16 +57,30 @@
 }
 
 .session-form {
-  margin-left: 100px;
-  margin-right: 50px;
-  margin-bottom: 100px;
-  margin-top: 50px;
+  margin: auto;
   width: 306px;
 }
 
-.session-form > input, .session-form > div > input, .session-form > div > ul > li > select {
+.session-form > input, .session-form > button, .session-form > div > input, .session-form > div > ul > li > select {
   height: 30px;
 }
+
+.session-form > button {
+  background-color: #D60306;
+  font-size: 100%;
+}
+
+.session-form > button:hover {
+  background-color: #ed0008;
+}
+
+.bottom-link {
+  text-align: right;
+  display: block;
+  width: 300px;
+  color: #666666;
+}
+
 
 .full-input, .half-input > input {
   margin-top: 2px;

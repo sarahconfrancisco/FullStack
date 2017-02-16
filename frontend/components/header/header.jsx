@@ -16,9 +16,14 @@ class Header extends React.Component {
   sessionLinks(){
     return (
     <nav className="login-signup">
-      <Link to="/signup" activeClassName="current">Sign Up</Link>
+
+      <Link to="/signup" activeClassName="current">
+        <button>Sign Up</button>
+      </Link>
       <br />
-      <Link to="/login" activeClassName="current">Log In</Link>
+      <Link to="/login" activeClassName="current">
+        <button>Log In</button>
+      </Link>
       <br />
       <button onClick={this.guestSignin()}>Login as Guest</button>
     </nav>
@@ -40,11 +45,13 @@ class Header extends React.Component {
 
   render(){
     return(
-      <div className="header">
-        <Link>Add a Restaurant</Link>
-        <span id="logo">Welp!</span>
+      <nav className="header">
+        <Link>
+          Add a Restaurant
+        </Link>
+        <img className="small-logo" src={window.images.logo} />
         {(this.props.currentUser && this.props.currentUser.id) ? this.personalGreeting() : this.sessionLinks()}
-      </div>
+      </nav>
     );
   };
 }
