@@ -1,11 +1,18 @@
 .res-show-header {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  margin-bottom: 13px;
+  margin-top: 20px;
 }
 
 .res-header-right {
   display: flex;
   justify-content: left;
+}
+
+.res-header-right > button {
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
 .type-price > span > a {

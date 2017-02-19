@@ -7,10 +7,13 @@ const ResAddress = (props) => {
     website = <span>Website:<a>{props.website}</a></span>
   }
   return(
-    <div>
-      <span>{props.address}</span>
-      <span>{props.city}, {props.state} {props.zip}</span>
+    <div className="address">
+      <span id="street">{props.address}</span>
+      <br />
+      <span id="city-zip">{props.city}, {props.state} {props.zip}</span>
+      <br />
       <span>Phone: {props.phone}</span>
+      <br />
       {website}
     </div>
   );

@@ -35,9 +35,12 @@ class RestaurantShow extends React.Component {
               zip={this.props.restaurant.zip} />
           </div>
         </div>
-        <div className="side-shelf">
-          <ResHours hours={this.props.restaurant.hours} />
-          <ResFeature features={this.props.restaurant.features} />
+        <div className="midcontent">
+          <div className="review">Reviews</div>
+          <div className="side-shelf">
+            <ResHours hours={this.props.restaurant.hours} />
+            <ResFeature features={this.props.restaurant.features} />
+          </div>
         </div>
       </div>
     );

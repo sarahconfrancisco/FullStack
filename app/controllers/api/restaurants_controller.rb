@@ -25,6 +25,7 @@ class Api::RestaurantsController < ApplicationController
   def show
     @restaurant = Restaurant.find(params[:id])
     @features = @restaurant.attributes.keys.select { |atr| @restaurant.attributes[atr] == true }
+    @hours = JSON.parse(@restaurant.hours)
     @types = @restaurant.types.map { |type| type.name }
   end
 
