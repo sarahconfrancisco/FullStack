@@ -1,7 +1,6 @@
 class Api::RestaurantsController < ApplicationController
 
   def create
-    debugger
     @restaurant = Restaurant.new(restaurant_params)
     @restaurant.user_id ||= current_user.id
     if @restaurant.save!
@@ -39,6 +38,15 @@ class Api::RestaurantsController < ApplicationController
     end
     @hours = JSON.parse(@restaurant.hours)
     @types = @restaurant.types.map { |type| type.name }
+  end
+
+  def update
+  end
+
+  def index
+  end
+
+  def destroy
   end
 
   private

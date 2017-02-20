@@ -4,6 +4,8 @@ class Restaurant < ActiveRecord::Base
   geocoded_by :full_address
   has_many :restaurant_types
   has_many :types, through: :restaurant_types
+  has_many :reviews
+  
 
   validates_uniqueness_of :name, scope: [:latitude, :longitude]
   after_validation :geocode, :if => lambda{ |obj| obj.address_changed? || obj.city_changed? || obj.zip_changed? }
