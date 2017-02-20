@@ -13,7 +13,7 @@ const ResFeature = (props) => {
   return(
     <div id="features">
       <h3>Restaurant Features</h3>
-      <ul>
+      <ul className="feature-list">
         {features}
       </ul>
     </div>

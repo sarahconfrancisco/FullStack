@@ -19,11 +19,15 @@ class RestaurantShow extends React.Component {
     }
     return(
       <div className="res-show">
+        <div className="top-third">
+
         <div className="top-shelf">
           <ResHeader
             name={this.props.restaurant.name}
             price={this.props.restaurant.price}
             types={this.props.restaurant.types} />
+        </div>
+        <div className="map-photos">
           <div className="map-address">
             <div id="map">Map</div>
             <ResAddress
@@ -34,6 +38,11 @@ class RestaurantShow extends React.Component {
               state={this.props.restaurant.city}
               zip={this.props.restaurant.zip} />
           </div>
+          <ul className="res-photos">
+            <li><div>Photo</div></li>
+            <li><div>Photo</div></li>
+            <li><div>Photo</div></li>
+          </ul>
         </div>
         <div className="midcontent">
           <div className="review">Reviews</div>
@@ -41,6 +50,7 @@ class RestaurantShow extends React.Component {
             <ResHours hours={this.props.restaurant.hours} />
             <ResFeature features={this.props.restaurant.features} />
           </div>
+        </div>
         </div>
       </div>
     );

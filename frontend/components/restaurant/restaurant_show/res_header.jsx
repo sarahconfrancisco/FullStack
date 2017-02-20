@@ -27,7 +27,7 @@ class ResHeader extends React.Component {
           <span># Ratings</span>
         </div>
         <div className="type-price">
-          <span>{price}, {types}</span>
+          <span>{price} • {types}</span>
         </div>
       </div>
 
