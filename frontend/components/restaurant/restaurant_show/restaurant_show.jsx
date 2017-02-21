@@ -4,6 +4,7 @@ import ResAddress from './res_address';
 import ResHours from './res_hours';
 import ResFeature from './res_features';
 import ReviewIndexContainer from '../../reviews/review_index/review_index_container';
+import  { Link, withRouter } from 'react-router';
 
 class RestaurantShow extends React.Component {
   constructor(props){
@@ -11,7 +12,7 @@ class RestaurantShow extends React.Component {
   }
 
   componentDidMount(){
-    this.props.showRestaurant(parseInt(this.props.location.pathname.slice(12)));
+    this.props.showRestaurant(this.props.params.restaurantId);
   }
 
   render(){
@@ -24,9 +25,12 @@ class RestaurantShow extends React.Component {
 
         <div className="top-shelf">
           <ResHeader
+            router={this.props.router}
+            id={this.props.restaurant.id}
             name={this.props.restaurant.name}
             price={this.props.restaurant.price}
-            types={this.props.restaurant.types} />
+            types={this.props.restaurant.types}
+            rating={this.props.rating} />
         </div>
         <div className="map-photos">
           <div className="map-address">
@@ -48,7 +52,7 @@ class RestaurantShow extends React.Component {
         <div className="midcontent">
           <div className="main-shelf">
             <h3>Reviews</h3>
-            <ReviewIndexContainer reviews={this.props.restaurant.reviews} />
+            <ReviewIndexContainer resId={this.props.restaurant.id} />
           </div>
           <div className="side-shelf">
             <ResHours hours={this.props.restaurant.hours} />

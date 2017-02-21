@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router';
 import App from './app';
 
 import SessionFormContainer from './session/session_form_container';
@@ -18,9 +18,9 @@ const Root = (props) => {
           <Route path="/login" component={SessionFormContainer} />
           <Route path="/signup" component={SessionFormContainer} />
           <Route path="/addrestaurant" component={RestaurantFormContainer} />
-          <Route path="/restaurant/:restaurantId" component={RestaurantShowContainer}></Route>
-          <Route path="/review/new" component={ReviewFormContainer} />
-          <Route path="/review/edit/:reviewId" component={ReviewFormContainer} />
+          <Route path="/restaurant/:restaurantId" component={RestaurantShowContainer}>
+          </Route>
+          <Route path="/newreview/:restaurantId" component={ReviewFormContainer} />
         </Route>
       </Router>
     </Provider>

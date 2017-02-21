@@ -4,7 +4,8 @@ import { indexReviews } from '../../../actions/review_actions';
 
 const mapStateToProps = (state, ownProps) => {
   return({
-    loggedIn: Boolean((state.currentUser && state.currentUser.id))
+    loggedIn: Boolean((state.currentUser && state.currentUser.id)),
+    reviews: state.reviewIndex
     });
 };
 

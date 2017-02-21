@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router'
+import { Link, withRouter} from 'react-router'
 
 
 class ResHeader extends React.Component {
@@ -18,7 +18,6 @@ class ResHeader extends React.Component {
   // const redStarImages = redStar.repeat(props.rating);
   // const whiteStarImages = whiteStar.repeat(5-props.rating);
   const price = "$".repeat(this.props.price);
-
   return(
     <div className='res-show-header'>
       <div className='res-header-left'>
@@ -33,7 +32,7 @@ class ResHeader extends React.Component {
 
 
       <div className='res-header-right'>
-        <button className="medium-button">
+        <button onClick={() => this.props.router.push(`/newreview/${this.props.id}`)} className="medium-button">
           <Link>
           <img src={window.images.star_icon} className="star-icon" />
             <span>

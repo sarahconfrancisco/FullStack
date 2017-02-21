@@ -4,6 +4,7 @@ class Review < ActiveRecord::Base
   after_initialize :create_date
   validates :user, :restaurant, :body, :date, :rating, presence: true
 
+
   private
   def create_date
     ymd = Date.today().to_s.split("-")

@@ -1,5 +1,5 @@
 @reviews.each do |review|
   json.set! review.id do
-    json.extract! review, :id, :body, :date, :rating
+    json.partial! "api/reviews/review", review: review
   end
 end

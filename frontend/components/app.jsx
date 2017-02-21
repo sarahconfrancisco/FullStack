@@ -13,7 +13,6 @@ render()
     <div>
       <HeaderContainer />
       <ErrorContainer route={this.props.router.location.pathname}/>
-      <Link to="/restaurant/1">Dunkin Donuts</Link>
       {this.props.children}
       <Footer />
     </div>
