@@ -3,7 +3,6 @@ import { addRestaurant } from '../../../actions/restaurant_actions';
 import RestaurantForm from './restaurant_form';
 
 const mapStateToProps = (state) => {
-  debugger
   return({
     restaurant: state.restaurant
   });

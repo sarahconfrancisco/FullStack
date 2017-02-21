@@ -3,6 +3,7 @@ import ResHeader from './res_header';
 import ResAddress from './res_address';
 import ResHours from './res_hours';
 import ResFeature from './res_features';
+import ReviewIndexContainer from '../../reviews/review_index/review_index_container';
 
 class RestaurantShow extends React.Component {
   constructor(props){
@@ -10,7 +11,7 @@ class RestaurantShow extends React.Component {
   }
 
   componentDidMount(){
-      this.props.showRestaurant(parseInt(this.props.params.id));
+    this.props.showRestaurant(parseInt(this.props.location.pathname.slice(12)));
   }
 
   render(){
@@ -45,7 +46,10 @@ class RestaurantShow extends React.Component {
           </ul>
         </div>
         <div className="midcontent">
-          <div className="review">Reviews</div>
+          <div className="main-shelf">
+            <h3>Reviews</h3>
+            <ReviewIndexContainer reviews={this.props.restaurant.reviews} />
+          </div>
           <div className="side-shelf">
             <ResHours hours={this.props.restaurant.hours} />
             <ResFeature features={this.props.restaurant.features} />

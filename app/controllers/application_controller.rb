@@ -3,9 +3,29 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :current_user, :logged_in?
+  helper_method :current_user, :logged_in?, :calculate_rating
 
   private
+
+  def calculate_rating(res)
+    reviews = res.reviews
+    if reviews.length > 0
+      res.num_reviews = reviews.count
+      ratings = reviews.map { |rev| rev.rating }
+      rating = (ratings.sum + 0.0) / ratings.length
+        x = rating % 1
+      if x <= 0.2
+        res.rating= rating.floor + 0.0
+      elsif x >= 0.8
+        res.rating = rating.ceil + 0.0
+      else
+        res.rating = rating.floor + 0.5
+      end
+    else
+      res.num_reviews = 0
+      res.rating = nil
+    end
+  end
 
   def logged_in?
     !!current_user

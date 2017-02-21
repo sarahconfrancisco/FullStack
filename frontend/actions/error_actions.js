@@ -9,6 +9,6 @@ export const receiveErrors = (errors) => {
 export const clearErrors = () => {
   return {
     type: RECEIVE_ERRORS,
-    errors: null
+    errors: {}
   }
 };

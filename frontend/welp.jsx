@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom';
 
 import Root from './components/root';
 import configureStore from './store/store';
+import { addReview } from './util/review_api_util';
+import { showRestaurant } from './util/restaurant_api_util';
+window.showRestaurant = showRestaurant;
+window.addReview = addReview;
 
 document.addEventListener("DOMContentLoaded", () => {
   let preloadedState

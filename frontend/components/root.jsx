@@ -7,6 +7,7 @@ import App from './app';
 import SessionFormContainer from './session/session_form_container';
 import RestaurantFormContainer from './restaurant/restaurant_form/restaurant_form_container';
 import RestaurantShowContainer from './restaurant/restaurant_show/restaurant_show_container';
+import ReviewFormContainer from './reviews/review_form/review_form_container';
 
 const Root = (props) => {
 
@@ -17,7 +18,9 @@ const Root = (props) => {
           <Route path="/login" component={SessionFormContainer} />
           <Route path="/signup" component={SessionFormContainer} />
           <Route path="/addrestaurant" component={RestaurantFormContainer} />
-          <Route path="/restaurant/:id" component={RestaurantShowContainer} />
+          <Route path="/restaurant/:restaurantId" component={RestaurantShowContainer}></Route>
+          <Route path="/review/new" component={ReviewFormContainer} />
+          <Route path="/review/edit/:reviewId" component={ReviewFormContainer} />
         </Route>
       </Router>
     </Provider>

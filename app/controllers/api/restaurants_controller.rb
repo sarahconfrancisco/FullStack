@@ -23,6 +23,7 @@ class Api::RestaurantsController < ApplicationController
 
   def show
     @restaurant = Restaurant.find(params[:id])
+    calculate_rating(@restaurant)
     @features = []
     @restaurant.attributes.keys.each do |atr|
       if @restaurant.attributes[atr] == true

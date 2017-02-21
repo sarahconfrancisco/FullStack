@@ -5,7 +5,8 @@ class Restaurant < ActiveRecord::Base
   has_many :restaurant_types
   has_many :types, through: :restaurant_types
   has_many :reviews
-  
+
+  attr_accessor :rating, :num_reviews
 
   validates_uniqueness_of :name, scope: [:latitude, :longitude]
   after_validation :geocode, :if => lambda{ |obj| obj.address_changed? || obj.city_changed? || obj.zip_changed? }
@@ -21,6 +22,4 @@ class Restaurant < ActiveRecord::Base
   def ensure_hours
     self.hours ||= "none"
   end
-
-
 end
