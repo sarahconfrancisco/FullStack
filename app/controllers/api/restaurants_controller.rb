@@ -23,7 +23,6 @@ class Api::RestaurantsController < ApplicationController
 
   def show
     @restaurant = Restaurant.find(params[:id])
-    calculate_rating(@restaurant)
     @features = []
     @restaurant.attributes.keys.each do |atr|
       if @restaurant.attributes[atr] == true
@@ -38,13 +37,21 @@ class Api::RestaurantsController < ApplicationController
       end
     end
     @hours = JSON.parse(@restaurant.hours)
-    @types = @restaurant.types.map { |type| type.name }
   end
 
   def update
   end
 
   def index
+    features = params[:features]
+    types = params[:types].delete(" ").split(",")
+    restaurants = Restaurant.has_types(types)
+    if features
+      features.each do |feat|
+        restaurants = restaurants.select { |res| res[feat] == true }
+      end
+    end
+    @restaurants = restaurants
   end
 
   def destroy

@@ -19,8 +19,34 @@ class Restaurant < ActiveRecord::Base
 
   validates :name, :price, :address, :city, :state, :zip, :phone, :hours, :user, presence: true
 
+  def self.has_types(types)
+    types = types.map{ |t| "'" + t + "'"}.join(", ")
+    self.find_by_sql(<<-SQL)
+      SELECT
+        DISTINCT(restaurants.*), types.name
+      FROM
+        restaurants
+        JOIN restaurant_types
+          ON restaurants.id = restaurant_types.restaurant_id
+        JOIN types
+          ON types.id = restaurant_types.type_id
+        WHERE
+          types.name IN (#{types})
+    SQL
+  end
+
   def full_address
     [address, city, state, zip].compact.join(", ")
+  end
+
+  def rating
+    ratings = self.reviews.map { |rev| rev.rating }
+    return nil if ratings.count < 1
+    (( 0.0 + ratings.sum) / ratings.count).round
+  end
+
+  def num_reviews
+    self.reviews.count
   end
 
   private

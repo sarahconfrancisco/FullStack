@@ -12,24 +12,6 @@ class ApplicationController < ActionController::Base
     dd.id
   end
 
-  def calculate_rating(res)
-    reviews = res.reviews
-    if reviews.length > 0
-      res.num_reviews = reviews.count
-      ratings = reviews.map { |rev| rev.rating }
-      rating = (ratings.sum + 0.0) / ratings.length
-        x = rating % 1
-      if x < 0.5
-        res.rating= rating.floor
-      elsif x >= 0.5
-        res.rating = rating.ceil
-      end
-    else
-      res.num_reviews = 0
-      res.rating = nil
-    end
-  end
-
   def logged_in?
     !!current_user
   end
