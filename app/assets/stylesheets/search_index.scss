@@ -1,0 +1,32 @@
+.restaurant-index-item {
+  box-sizing: border-box;
+  width: 630px;
+  margin: auto;
+  display: flex;
+}
+
+.left-index-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.right-index-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.smallest-star {
+  box-sizing: border-box;
+  height: 18px;
+  width: 18px;
+}
+
+.index-stars {
+  display: flex;
+}
+
+.smallest-star > img {
+  height: 14px;
+  width: 14px;
+  margin: auto;
+}

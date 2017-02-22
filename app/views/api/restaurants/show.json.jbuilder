@@ -1,4 +1,4 @@
-json.partial! "api/restaurants/restaurant", restaurant: @restaurant, types: @restaurant.types
+json.partial! "api/restaurants/restaurant", restaurant: @restaurant
 json.features do
   json.array! @features
 end

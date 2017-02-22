@@ -23,7 +23,7 @@ class Restaurant < ActiveRecord::Base
     types = types.map{ |t| "'" + t + "'"}.join(", ")
     self.find_by_sql(<<-SQL)
       SELECT
-        DISTINCT(restaurants.*), types.name
+        DISTINCT(restaurants.*)
       FROM
         restaurants
         JOIN restaurant_types

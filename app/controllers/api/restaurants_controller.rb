@@ -52,6 +52,8 @@ class Api::RestaurantsController < ApplicationController
       end
     end
     @restaurants = restaurants
+    @types = params[:types]
+    @features = params[:features]
   end
 
   def destroy

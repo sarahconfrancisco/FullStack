@@ -8,7 +8,6 @@ import { showRestaurant } from './util/restaurant_api_util';
 import { fetchSearchRestaurants } from './util/search_api_util';
 window.fetchSearchRestaurants = fetchSearchRestaurants;
 
-
 document.addEventListener("DOMContentLoaded", () => {
   let preloadedState
   if (window.currentUser){
