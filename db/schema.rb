@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220164507) do
+ActiveRecord::Schema.define(version: 20170222000244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,28 +26,40 @@ ActiveRecord::Schema.define(version: 20170220164507) do
   add_index "restaurant_types", ["restaurant_id", "type_id"], name: "index_restaurant_types_on_restaurant_id_and_type_id", unique: true, using: :btree
 
   create_table "restaurants", force: :cascade do |t|
-    t.integer  "user_id",                      null: false
-    t.string   "name",                         null: false
-    t.string   "address",                      null: false
-    t.string   "city",                         null: false
-    t.string   "state",                        null: false
-    t.string   "zip",                          null: false
-    t.string   "phone",                        null: false
+    t.integer  "user_id",                              null: false
+    t.string   "name",                                 null: false
+    t.string   "address",                              null: false
+    t.string   "city",                                 null: false
+    t.string   "state",                                null: false
+    t.string   "zip",                                  null: false
+    t.string   "phone",                                null: false
     t.string   "website"
-    t.boolean  "delivery",     default: false
-    t.boolean  "pick_up",      default: false
-    t.boolean  "reservations", default: false
-    t.boolean  "parking",      default: false
-    t.boolean  "outdoor",      default: false
-    t.boolean  "credit",       default: false
-    t.boolean  "bar",          default: false
-    t.boolean  "byob",         default: false
-    t.text     "hours",                        null: false
-    t.float    "latitude",                     null: false
-    t.float    "longitude",                    null: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.boolean  "delivery",             default: false
+    t.boolean  "pick_up",              default: false
+    t.boolean  "reservations",         default: false
+    t.boolean  "parking",              default: false
+    t.boolean  "outdoor",              default: false
+    t.boolean  "credit",               default: false
+    t.boolean  "bar",                  default: false
+    t.boolean  "byob",                 default: false
+    t.text     "hours",                                null: false
+    t.float    "latitude",                             null: false
+    t.float    "longitude",                            null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.integer  "price"
+    t.string   "image_1_file_name"
+    t.string   "image_1_content_type"
+    t.integer  "image_1_file_size"
+    t.datetime "image_1_updated_at"
+    t.string   "image_2_file_name"
+    t.string   "image_2_content_type"
+    t.integer  "image_2_file_size"
+    t.datetime "image_2_updated_at"
+    t.string   "image_3_file_name"
+    t.string   "image_3_content_type"
+    t.integer  "image_3_file_size"
+    t.datetime "image_3_updated_at"
   end
 
   add_index "restaurants", ["bar"], name: "index_restaurants_on_bar", using: :btree

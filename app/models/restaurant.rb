@@ -5,6 +5,12 @@ class Restaurant < ActiveRecord::Base
   has_many :restaurant_types
   has_many :types, through: :restaurant_types
   has_many :reviews
+  has_attached_file :image_1, default_url: "empty_restaurant.jpg"
+  validates_attachment_content_type :image_1, content_type: /\Aimage\/.*\Z/
+  has_attached_file :image_2, default_url: "full-bar.jpg"
+  validates_attachment_content_type :image_2, content_type: /\Aimage\/.*\Z/
+  has_attached_file :image_3, default_url: "pasta.jpg"
+  validates_attachment_content_type :image_3, content_type: /\Aimage\/.*\Z/
 
   attr_accessor :rating, :num_reviews
 

@@ -30,7 +30,9 @@ class RestaurantShow extends React.Component {
             name={this.props.restaurant.name}
             price={this.props.restaurant.price}
             types={this.props.restaurant.types}
-            rating={this.props.rating} />
+            rating={this.props.restaurant.rating}
+            numReviews={this.props.restaurant.num_reviews}
+             />
         </div>
         <div className="map-photos">
           <div className="map-address">
@@ -44,14 +46,13 @@ class RestaurantShow extends React.Component {
               zip={this.props.restaurant.zip} />
           </div>
           <ul className="res-photos">
-            <li><div>Photo</div></li>
-            <li><div>Photo</div></li>
-            <li><div>Photo</div></li>
+            <li><div className="photo-container"><img src={this.props.restaurant.image_1_url}/></div></li>
+            <li><div className="photo-container"><img src={this.props.restaurant.image_2_url}/></div></li>
+            <li><div className="photo-container"><img src={this.props.restaurant.image_3_url}/></div></li>
           </ul>
         </div>
         <div className="midcontent">
           <div className="main-shelf">
-            <h3>Reviews</h3>
             <ReviewIndexContainer resId={this.props.restaurant.id} />
           </div>
           <div className="side-shelf">

@@ -13,17 +13,48 @@ class ResHeader extends React.Component {
     typeArray.push(this.props.types[key]);
   }
   typeArray = typeArray.join(", ").split(" ");
-  let starImages;
+
   const types = (typeArray.map((type) => <a key={type}>{type} </a>));
-  // const redStarImages = redStar.repeat(props.rating);
-  // const whiteStarImages = whiteStar.repeat(5-props.rating);
+
   const price = "$".repeat(this.props.price);
   return(
     <div className='res-show-header'>
       <div className='res-header-left'>
         <h1>{this.props.name}</h1>
-        <div>
-          <span># Ratings</span>
+        <div className="res-rating">
+          <ul className="res-stars">
+            <li>
+              <button value={1} className={ ((this.props.rating >= 1 ) ? "highlight " : "" ) + "smaller-star"} >
+                <img src={window.images.star_icon} className="star-icon-smaller" />
+              </button>
+            </li>
+
+            <li>
+              <button value={2} className={ ((this.props.rating >= 2 ) ? "highlight " : "" ) + "smaller-star"} >
+                <img src={window.images.star_icon} className="star-icon-smaller" />
+              </button>
+            </li>
+
+            <li>
+              <button value={3} className={ ((this.props.rating >= 3 ) ? "highlight " : "" ) + "smaller-star"} >
+                <img src={window.images.star_icon} className="star-icon-smaller" />
+              </button>
+            </li>
+
+            <li>
+              <button value={4} className={ ((this.props.rating >= 4 ) ? "highlight " : "" ) + "smaller-star"} >
+                <img src={window.images.star_icon} className="star-icon-smaller" />
+              </button>
+            </li>
+
+            <li>
+              <button value={5} className={ ((this.props.rating >= 5 ) ? "highlight " : "" ) + "smaller-star"} >
+                <img src={window.images.star_icon} className="star-icon" />
+              </button>
+            </li>
+
+          </ul>
+          <span> {this.props.numReviews} reviews</span>
         </div>
         <div className="type-price">
           <span>{price} • {types}</span>

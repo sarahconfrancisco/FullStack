@@ -25,6 +25,7 @@ class ReviewIndex extends React.Component {
     })
     return(
       <div className="reviews">
+        <h2>Reviews</h2>
         <ul>
           {reviewItems}
         </ul>

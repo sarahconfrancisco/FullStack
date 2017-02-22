@@ -14,12 +14,10 @@ class ApplicationController < ActionController::Base
       ratings = reviews.map { |rev| rev.rating }
       rating = (ratings.sum + 0.0) / ratings.length
         x = rating % 1
-      if x <= 0.2
-        res.rating= rating.floor + 0.0
-      elsif x >= 0.8
-        res.rating = rating.ceil + 0.0
-      else
-        res.rating = rating.floor + 0.5
+      if x < 0.5
+        res.rating= rating.floor
+      elsif x >= 0.5
+        res.rating = rating.ceil
       end
     else
       res.num_reviews = 0

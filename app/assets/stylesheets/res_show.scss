@@ -130,3 +130,13 @@
     line-height: 1.3125em;
     color: #d32323;
   }
+.photo-container {
+  display: block;
+  height: 222px;
+  width: 222px;
+}
+
+.photo-container > img {
+  height: 220px;
+  width: auto;
+}
