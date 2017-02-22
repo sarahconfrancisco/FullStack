@@ -35,7 +35,7 @@ dd = Restaurant.create!({
   "{\"Mon\":{\"start\":\"8 am\",\"end\":\"5 pm\"},\"Tue\":{\"start\":\"8 am\",\"end\":\"5 pm\"},\"Wed\":{\"start\":\"8 am\",\"end\":\"5 pm\"},\"Thu\":{\"start\":\"8 am\",\"end\":\"5 pm\"},\"Fri\":{\"start\":\"8 am\",\"end\":\"5 pm\"}}",
  price: 1
   })
-
+  
 donuts = Type.create!(name: "Donuts")
 coffee = Type.create!(name: "Coffee")
 breakfast = Type.create!(name: "Breakfast")
