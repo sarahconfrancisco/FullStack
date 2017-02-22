@@ -11,6 +11,8 @@ RestaurantType.delete_all
 Type.delete_all
 Review.delete_all
 guest = User.create!({fname: "guest", lname: "guest", email: "guest@gmail.com", zip: "10001", password: "password"})
+sarah = User.create!(fname: "Sarah" lname: "Confrancisco", email: "sarah@gmail.com", zip: "07481", password: "confrancisco")
+adam = User.create!(fname: "Adam", lname: "App", email: "adam@gmail.com", zip: "10005", password: "password")
 
 dd = Restaurant.create!({
  user_id: guest.id,
@@ -39,7 +41,9 @@ coffee = Type.create!(name: "Coffee")
 breakfast = Type.create!(name: "Breakfast")
 
 dd1 = RestaurantType.create!(restaurant_id: dd.id, type_id: donuts.id)
-dd1 = RestaurantType.create!(restaurant_id: dd.id, type_id: coffee.id)
-dd1 = RestaurantType.create!(restaurant_id: dd.id, type_id: breakfast.id)
+dd2 = RestaurantType.create!(restaurant_id: dd.id, type_id: coffee.id)
+dd3 = RestaurantType.create!(restaurant_id: dd.id, type_id: breakfast.id)
 
-dd_review = Review.create!(restaurant_id: dd.id, user_id: guest.id, body: "Donuts are great! Coffee is okay.", rating: 4)
+dd_review_1 = Review.create!(restaurant_id: dd.id, user_id: guest.id, body: "Donuts are great! Coffee is okay.", rating: 4)
+dd_review_2 = Review.create!(restaurant_id: dd.id, user_id: sarah.id, body: "Krisy Kreme is better", rating: 2)
+dd_review_3 = Review.create!(restaurant_id: dd.id, user_id: adam.id, body: "Best place ever!!!!", rating: 5)
