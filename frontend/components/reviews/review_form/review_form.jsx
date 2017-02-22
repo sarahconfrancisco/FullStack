@@ -111,7 +111,7 @@ class ReviewForm extends React.Component {
       </div>
         <textarea value={this.state.body || ""} onChange={this.update('body').bind(this)} />
       </div>
-      <button onClick={this.handleSubmit().bind(this)}><span>Post Review</span></button>
+      <button className="post-review-button" onClick={this.handleSubmit().bind(this)}><span>Post Review</span></button>
     </div>
     );
   }

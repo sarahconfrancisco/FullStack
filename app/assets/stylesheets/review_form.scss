@@ -59,3 +59,15 @@
   line-height: 1.3125em;
   color: #d32323;
 }
+
+.post-review-button {
+  padding: 5px 8px;
+  border: 1px solid #8D0005;
+  background: linear-gradient(#ed0008, #dd1600);
+}
+
+.post-review-button > span {
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+}
