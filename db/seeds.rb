@@ -5,45 +5,90 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-User.delete_all
-Restaurant.delete_all
-RestaurantType.delete_all
-Type.delete_all
-Review.delete_all
-guest = User.create!({fname: "guest", lname: "guest", email: "guest@gmail.com", zip: "10001", password: "password"})
-sarah = User.create!(fname: "Sarah", lname: "Confrancisco", email: "sarah@gmail.com", zip: "07481", password: "confrancisco")
-adam = User.create!(fname: "Adam", lname: "App", email: "adam@gmail.com", zip: "10005", password: "password")
 
-dd = Restaurant.create!({
- user_id: guest.id,
- name: "Dunkin Donuts",
- address: "152 W 31st St",
- city: "New York",
- state: "NY",
- zip: "10001",
- phone: "55555555555",
- website: nil,
- delivery: false,
- pick_up: false,
- reservations: false,
- parking: true,
- outdoor: true,
- credit: true,
- bar: false,
- byob: false,
- hours:
-  "{\"Mon\":{\"start\":\"8 am\",\"end\":\"5 pm\"},\"Tue\":{\"start\":\"8 am\",\"end\":\"5 pm\"},\"Wed\":{\"start\":\"8 am\",\"end\":\"5 pm\"},\"Thu\":{\"start\":\"8 am\",\"end\":\"5 pm\"},\"Fri\":{\"start\":\"8 am\",\"end\":\"5 pm\"}}",
- price: 1
-  })
+# guest = User.create!({fname: "guest", lname: "guest", email: "guest@gmail.com", zip: "10001", password: "password"})
+# sarah = User.create!(fname: "Sarah", lname: "Confrancisco", email: "sarah@gmail.com", zip: "07481", password: "confrancisco")
+# adam = User.create!(fname: "Adam", lname: "App", email: "adam@gmail.com", zip: "10005", password: "password")
+#
+# dd = Restaurant.create!({
+#  user_id: guest.id,
+#  name: "Dunkin Donuts",
+#  address: "152 W 31st St",
+#  city: "New York",
+#  state: "NY",
+#  zip: "10001",
+#  phone: "55555555555",
+#  website: nil,
+#  delivery: false,
+#  pick_up: false,
+#  reservations: false,
+#  parking: true,
+#  outdoor: true,
+#  credit: true,
+#  bar: false,
+#  byob: false,
+#  hours:
+#   "{\"Mon\":{\"start\":\"8 am\",\"end\":\"5 pm\"},\"Tue\":{\"start\":\"8 am\",\"end\":\"5 pm\"},\"Wed\":{\"start\":\"8 am\",\"end\":\"5 pm\"},\"Thu\":{\"start\":\"8 am\",\"end\":\"5 pm\"},\"Fri\":{\"start\":\"8 am\",\"end\":\"5 pm\"}}",
+#  price: 1
+#   })
+images = ["coffee.jpg", "donuts.png", "empty_restaurant.jpg", "fries.jpg", "full-bar.jpg", "hydrating-food.jpg", "images-1.jpg", "images-2.jpg", "images-3.jpg", "images-4.jpg", "images-5.jpg", "images.jpg", "macncheesejpg.jpg", "pairings-savory1-food.jpg", "peas.jpg", "sidedishes.jpg", "chicken-parmesan.jpg"]
+latitudes = (40738771..40768058).to_a
+longitudes = (-74002462..-73966031).to_a
+hours = ["{\"start\":\"8 am\",\"end\":\"5 pm\"}", "{\"start\":\"5 am\",\"end\":\"12 pm\"}", "{\"start\":\"11 am\",\"end\":\"11 pm\"}", "{\"start\":\"12 am\",\"end\":\"12 pm\"}"]
+ZIP_CODES = ["10001", "10011", "10018", "10019", "10020", "10036", "10029", "10035", "10010", "10016", "10017", "10022", "10012", "10013", "10014"]
+food_types = %w(Afghan African American Arabian Argentine Armenian Australian Austrian Bangladeshi Barbeque Basque Belgian Brasseries Brazilian Breakfast Brunch British Buffets Burgers Burmese Cafes Cafeteria Cajun/Creole Cambodian Caribbean Catalan Cheesesteaks Chicken Chinese Comfort Creperies Cuban Czech Delis Diners Dinner Ethiopian Fast-Food Filipino Fish&Chips Fondue Food-Court Food-Stand French Gastropubs German Gluten-Free Greek Guamanian Halal Hawaiian Himalayan/Nepalese Honduran Hungarian Iberian Indian Indonesian Irish Italian Japanese Kebab Korean Kosher Laotian Live/Raw Malaysian Mediterranean Mexican Mongolian Moroccan Nicaraguan Noodles Pakistani Pan-Asian Persian/Iranian Peruvian Pizza Polish Pop-Up Portuguese Poutineries Russian Salad Sandwiches Scandinavian Scottish Seafood Singaporean Slovakian Soul Soup Southern Spanish Steakhouses Supper Sushi Syrian Taiwanese Tapas Tex-Mex Thai Turkish Ukrainian Uzbek Vegan Vegetarian Vietnamese Waffles Wraps)
+types = []
+restaurants = []
+users = []
 
-donuts = Type.create!(name: "Donuts")
-coffee = Type.create!(name: "Coffee")
-breakfast = Type.create!(name: "Breakfast")
+10.times do
+  user = User.create!({fname: Faker::Name.first_name, lname: Faker::Name.last_name, email: Faker::Internet.safe_email, zip: ZIP_CODES.sample, password: "password"})
+  users.push(user)
+end
 
-dd1 = RestaurantType.create!(restaurant_id: dd.id, type_id: donuts.id)
-dd2 = RestaurantType.create!(restaurant_id: dd.id, type_id: coffee.id)
-dd3 = RestaurantType.create!(restaurant_id: dd.id, type_id: breakfast.id)
+50.times do
+  res = Restaurant.new(
+  {
+   user_id: users.sample.id,
+   name: Faker::Book.title,
+   latitude: (latitudes.sample / 1000000.0),
+   longitude: (longitudes.sample / 1000000.0),
+   phone: Faker::PhoneNumber.cell_phone,
+   website: Faker::Internet.url,
+   delivery: Faker::Boolean(.5),
+   pick_up: Faker::Boolean(.5),
+   reservations: Faker::Boolean(.4),
+   parking: Faker::Boolean(.2),
+   outdoor: Faker::Boolean(.5),
+   credit: Faker::Boolean(.8),
+   bar: Faker::Boolean(.2),
+   byob: Faker::Boolean(.3),
+   price: [1,2,3,4].sample,
+   hours: "{\"Sun\": #{hours.sample}, \"Mon\": #{hours.sample}, \"Tue\": #{hours.sample}, \"Wed\": #{hours.sample}, \"Thu\": #{hours.sample}, \"Fri\": #{hours.sample}, \"Sat\": #{hours.sample}}"
+    }
+  )
+  res.image_1 = File.open("app/assets/images/#{images.sample}")
+  res.image_2 = File.open("app/assets/images/#{images.sample}")
+  res.image_3 = File.open("app/assets/images/#{images.sample}")
 
-dd_review_1 = Review.create!(restaurant_id: dd.id, user_id: guest.id, body: "Donuts are great! Coffee is okay.", rating: 4)
-dd_review_2 = Review.create!(restaurant_id: dd.id, user_id: sarah.id, body: "Krisy Kreme is better", rating: 2)
-dd_review_3 = Review.create!(restaurant_id: dd.id, user_id: adam.id, body: "Best place ever!!!!", rating: 5)
+  address_array = res.location.split(",")
+  res.address = address_array[0]
+  res.city = address_array[1]
+  res.state, res.zip = address_array[2].split(" ")
+  res.save!
+  restaurants.push(res)
+
+end
+
+food_types.each do |type|
+  ty = Type.create!({name: type})
+  types.push(ty)
+end
+
+150.times do
+  rt = RestaurantType.create!({restaurant_id: restaurants.sample.id, type_id: types.sample.id})
+end
+
+150.times do
+  review = Review.create!({user_id: users.sample.id, restaurant_id: restaurants.sample.id, body: Faker::Lorem.paragraph, rating: [1,2,3,4,5].sample})
+end

@@ -1,7 +1,8 @@
 class Restaurant < ActiveRecord::Base
   belongs_to :user
-  after_initialize :geocode, :ensure_hours
+  after_initialize :geocode, :reverse_geocode, :ensure_hours
   geocoded_by :full_address
+  reverse_geocoded_by :latitude, :longitude, :address => :location
   has_many :restaurant_types
   has_many :types, through: :restaurant_types
   has_many :reviews
@@ -12,7 +13,7 @@ class Restaurant < ActiveRecord::Base
   has_attached_file :image_3, default_url: "pasta.jpg"
   validates_attachment_content_type :image_3, content_type: /\Aimage\/.*\Z/
 
-  attr_accessor :rating, :num_reviews
+  attr_accessor :rating, :num_reviews, :location
 
   validates_uniqueness_of :name, scope: [:latitude, :longitude]
   after_validation :geocode, :if => lambda{ |obj| obj.address_changed? || obj.city_changed? || obj.zip_changed? }
