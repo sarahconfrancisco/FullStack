@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const makeTinyStars = (rating) => {
   return(
@@ -41,13 +42,19 @@ const makeTinyStars = (rating) => {
 const RestaurantIndexItem = (props) => {
   const tinyStars = makeTinyStars(props.restaurant.rating);
   const price = "$".repeat(parseInt(props.restaurant.price));
+  const types = (props.restaurant.types.map((type) => <a key={type}> {type} </a>));
   return(
     <div className="restaurant-index-item">
       <div className="left-index-item">
-        <span>{props.restaurant.name}</span>
-        {tinyStars}
-        <span>{props.restaurant.num_revews} reviews</span>
-        <span>{price} {props.restaurant.types.join(", ")}</span>
+
+        <Link to={`/restaurant/${props.restaurant.id}`}>{props.restaurant.name}</Link>
+        <div className="res-rating">
+          {tinyStars}
+          <span>{props.restaurant.num_reviews} reviews</span>
+        </div>
+        <div className="type-price">
+          <span>{price} • {types}</span>
+        </div>
       </div>
       <div className="right-index-item">
         <span>{props.restaurant.address}</span>

@@ -3,7 +3,7 @@ import { RECEIVE_RESULTS } from '../actions/search_actions';
 
 const defaultState = {
   results: {},
-  params: {types: "", features: []}
+  params: {types: "", features: [], zip: ""}
 }
 
 const SearchReducer = (oldState = defaultState, action) => {

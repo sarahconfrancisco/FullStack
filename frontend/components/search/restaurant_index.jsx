@@ -11,7 +11,7 @@ const RestaurantIndex = (props) => {
   }
 
   return(
-    <div>
+    <div className="restaurant-index">
       <ul>
         {indexItems}
       </ul>

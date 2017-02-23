@@ -3,8 +3,8 @@ import { receiveErrors } from './error_actions';
 
 export const RECEIVE_RESULTS = "RECEIVE_RESULTS";
 
-export const fetchSearchRestaurants = (types, features) => dispatch => {
-  return APIUtil.fetchSearchRestaurants(types, features)
+export const fetchSearchRestaurants = (types, features, zip) => dispatch => {
+  return APIUtil.fetchSearchRestaurants(types, features, zip)
     .then((results) => {
       return dispatch(receiveResults(results))},
     (err) => dispatch(receiveErrors(err.responseJSON)));

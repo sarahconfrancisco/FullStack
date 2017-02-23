@@ -11,4 +11,5 @@ json.set! :params do
   json.features do
     json.array! @features
   end
+  json.zip @zip
 end

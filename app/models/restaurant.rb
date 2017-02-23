@@ -19,7 +19,8 @@ class Restaurant < ActiveRecord::Base
 
   validates :name, :price, :address, :city, :state, :zip, :phone, :hours, :user, presence: true
 
-  def self.has_types(types)
+  def self.has_types(types, zip)
+    zip = "'" + zip.to_s + "'"
     types = types.map{ |t| "'" + t + "'"}.join(", ")
     self.find_by_sql(<<-SQL)
       SELECT
@@ -31,7 +32,7 @@ class Restaurant < ActiveRecord::Base
         JOIN types
           ON types.id = restaurant_types.type_id
         WHERE
-          types.name IN (#{types})
+          types.name IN (#{types}) AND zip = #{zip}
     SQL
   end
 

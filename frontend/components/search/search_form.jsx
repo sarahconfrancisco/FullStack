@@ -13,9 +13,10 @@ class SearchForm extends React.Component {
   handleSubmit(){
     return((e) => {
       e.preventDefault();
+      const zip = this.state.zip;
       const types = this.state.types;
       const features = this.state.features;
-      this.props.fetchSearchRestaurants(types, features);
+      this.props.fetchSearchRestaurants(types, features, zip);
     });
   }
 
@@ -35,11 +36,12 @@ class SearchForm extends React.Component {
   }
 
   makeCheckBox(label, value){
+    const checked = this.state.features.includes(value) ? "checked" : ""
     return(
-      <l key={value}>
+      <li key={value}>
+        <input type="checkbox" checked={ checked } value={value} />
         <label>{label}</label>
-        <input type="checkbox" check={this.state.features.includes(value)} value={value} />
-      </l>
+      </li>
     );
   }
 
@@ -47,21 +49,35 @@ class SearchForm extends React.Component {
     if(!this.state.features){
       return(<div></div>);
     }
-    const values = ["delivery", "pick_up", "reservations", "parking", "outdoor", "credit", "bar", "byob" ];
-    const labels = ["Delivers", "Take Out", "Accepts Reservations", "Has Parking", "Has Outdoor Seating", "Accepts Credit Card", "Serves Alcohol", "BYOB"];
-    const checkBoxes = values.map((val, index) => this.makeCheckBox(labels[index], val));
+    const values1 = ["delivery", "pick_up", "reservations", "parking"];
+    const labels1 = ["Delivers", "Take Out", "Accepts Reservations", "Has Parking"];
+    const values2 = ["outdoor", "credit", "bar", "byob" ];
+    const labels2 = ["Has Outdoor Seating", "Accepts Credit Card", "Serves Alcohol", "BYOB"];
+    const checkBoxes1 = values1.map((val, index) => this.makeCheckBox(labels1[index], val));
+    const checkBoxes2 = values2.map((val, index) => this.makeCheckBox(labels2[index], val));
     return(
       <div className="search-form">
         <div className="search-bar" >
           <span>Find</span>
-          <input value={this.state.types} onChange={this.update('types').bind(this)} />
+          <input value={this.state.types} placeholder="breakfast, coffee" onChange={this.update('types').bind(this)} />
+          <span>Near</span>
+          <input type="text" value={this.state.zip} placeholder="10001" onChange={this.update('zip').bind(this)} />
           <button onClick={this.handleSubmit().bind(this)} className="search-button">
             <img src={window.images.magnifying_glass_icon} />
           </button>
         </div>
         <div onClick={this.addFeature().bind(this)} className="features-search">
           <ul>
-            {checkBoxes}
+            <li>
+              <ul className="checkbox-ul">
+                {checkBoxes1}
+              </ul>
+            </li>
+            <li>
+              <ul className="checkbox-ul">
+                {checkBoxes2}
+              </ul>
+            </li>
           </ul>
         </div>
       </div>);

@@ -1,7 +1,7 @@
-export const fetchSearchRestaurants = (types, features) => {
+export const fetchSearchRestaurants = (types, features, zip) => {
   return $.ajax({
     method: "GET",
     url: `/api/restaurants`,
-    data: { types, features }
+    data: { types, features, zip }
   });
 };
