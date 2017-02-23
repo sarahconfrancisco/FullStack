@@ -51,7 +51,7 @@ class Header extends React.Component {
           </Link>
         : <Link></Link>}
 
-        <img className="small-logo" src={window.images.logo} />
+        <Link to="/"><img className="small-logo" src={window.images.logo} /></Link>
         {(this.props.currentUser && this.props.currentUser.id) ? this.personalGreeting() : this.sessionLinks()}
       </nav>
     );

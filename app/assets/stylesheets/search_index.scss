@@ -25,21 +25,13 @@
   flex-direction: column;
 }
 
-.smallest-star {
-  box-sizing: border-box;
-  height: 20px;
-  width: 20px;
-}
+
 
 .index-stars {
   display: flex;
 }
 
-.smallest-star > img {
-  height: 16px;
-  width: 16px;
-  margin: auto;
-}
+
 
 .left-index-item > div > span {
   margin: 2px;

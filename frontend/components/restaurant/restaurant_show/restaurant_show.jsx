@@ -36,7 +36,11 @@ class RestaurantShow extends React.Component {
         </div>
         <div className="map-photos">
           <div className="map-address">
-            <div id="map">Map</div>
+            <div id="map">
+              <img src={`https://maps.googleapis.com/maps/api/staticmap?center=${this.props.restaurant.zip}&size=300x300
+&markers=color:red%7Clabel:C%7C${this.props.restaurant.latitude},${this.props.restaurant.longitude}
+&key=AIzaSyCeNvQ8uvwW-dHA9Xo4CHXiUF9hTWLBXVU`} />
+            </div>
             <ResAddress
               address={this.props.restaurant.address}
               phone={this.props.restaurant.phone}
