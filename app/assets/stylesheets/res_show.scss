@@ -43,11 +43,16 @@
   cursor: pointer;
   margin-left: 5px;
   word-wrap: break-word;
+  font-size: 14px;
 }
 
 #street, #city-zip{
   font-weight: bold;
   padding: 3px;
+}
+
+#city-zip {
+  margin-left: 18px;
 }
 
 .side-shelf {
@@ -67,9 +72,6 @@
 .hours li {
   float: left;
   font-size: 14px;
-}
-
-.hours {
 }
 
 .all-hours {

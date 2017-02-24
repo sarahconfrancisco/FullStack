@@ -44,7 +44,7 @@ class Api::RestaurantsController < ApplicationController
 
   def index
     features = params[:features]
-    types = params[:types].delete(" ").split(",")
+    types = params[:types].downcase.delete(" ").split(",")
     zip = params[:zip]
     restaurants = Restaurant.has_types(types, zip)
     if features

@@ -8,7 +8,6 @@ class RestaurantMap extends React.Component {
   }
 
   componentDidMount(){
-    console.log("componentDidMount");
     this.map = new google.maps.Map(this.mapNode, {
       center: {"lat": 40.7127837,
               "lng": -74.0059413},
@@ -21,7 +20,6 @@ class RestaurantMap extends React.Component {
   }
 
   componentWillUpdate(nextProps){
-    console.log("componentDidUpdate");
     this.codeAddress(nextProps.zip, this.map, this.MarkerManager, this.geocoder, nextProps.restaurants);
   }
 
@@ -31,7 +29,6 @@ class RestaurantMap extends React.Component {
       if (status == google.maps.GeocoderStatus.OK) {
         let lat = results[0].geometry.location.lat();
         let lng = results[0].geometry.location.lng();
-        console.log("I am setting the center");
         map.setCenter(new google.maps.LatLng(lat, lng));
         MarkerManager.updateMarkers(restaurants);
       }

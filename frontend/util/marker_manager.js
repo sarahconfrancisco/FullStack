@@ -57,10 +57,8 @@ class MarkerManager {
 
   updateMarkers(restaurants) {
     this.restaurants = restaurants;
-    console.log(this.restaurants);
     this._markersToRemove().forEach((marker) => this._removeMarker(marker));
     this._restaurantsToAdd().forEach((restaurant) => this._createMarkerFromRestaurant(restaurant));
-    console.log(this.markers);
   }
 }
 

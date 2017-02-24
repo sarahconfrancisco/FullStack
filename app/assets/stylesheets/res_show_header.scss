@@ -43,6 +43,10 @@
   margin: auto;
 }
 
+.medium-button > a {
+  color: white;
+}
+
 .grey-button > a {
   font-size: 14px;
   color: white;
@@ -123,4 +127,10 @@
 .address {
   width: 290px;
   word-wrap: break-word;
+}
+
+.icon {
+  height: 16px;
+  width: 16px;
+  margin-right: 5px;
 }

@@ -44,8 +44,8 @@
 
 #map-container {
     display: block;
-    height: 400px;
-    width: 400px;
+    height: 300px;
+    width: 300px;
     box-sizing: border-box;
     position: static;
 }
@@ -64,4 +64,16 @@
 
 .restaurant-index {
   width: 630px;
+}
+
+.avatar-container {
+  height: 90px;
+  width: 90px;
+  margin-right: 16px;
+}
+
+.avatar-container > img {
+  height: 90px;
+  width: 90px;
+  border-radius: 4px;
 }

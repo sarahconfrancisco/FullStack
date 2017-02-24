@@ -8,11 +8,19 @@ const ResAddress = (props) => {
   }
   return(
     <div className="address">
-      <span id="street">{props.address}</span>
-      <br />
+      <div className="street">
+        <img className="icon" src={window.images.marker_icon} />
+        <span>{props.address}</span>
+      </div>
       <span id="city-zip">{props.city}, {props.state} {props.zip}</span>
-      <br />
-      <span>Phone: {props.phone}</span>
+      <div className="directions">
+        <img className="icon" src={window.images.arrow_icon} />
+        <a>Get Directions</a>
+      </div>
+      <div className="phone">
+        <img className="icon" src={window.images.phone_icon} />
+        <span>Phone: {props.phone}</span>
+      </div>
       <br />
       {website}
     </div>

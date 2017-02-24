@@ -47,6 +47,7 @@ const RestaurantIndexItem = (props) => {
   const types = (typeArray.map((type) => <a key={type}>{type} </a>));
   return(
     <div className="restaurant-index-item">
+      <div className="avatar-container"><img src={props.restaurant.image_1_url}/></div>
       <div className="left-index-item">
 
         <Link to={`/restaurant/${props.restaurant.id}`}>{props.restaurant.name}</Link>
