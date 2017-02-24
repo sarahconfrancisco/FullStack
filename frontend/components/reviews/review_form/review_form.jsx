@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router';
+import RestaurantIndexItem from '../../search/restaurant_index_item';
 
 class ReviewForm extends React.Component {
 
@@ -14,6 +15,7 @@ class ReviewForm extends React.Component {
   }
 
   componentDidMount(){
+    this.props.showRestaurant(this.props.params.restaurantId);
     if(this.props.currentUser.id){
       this.props.getReview(this.props.currentUser.id, this.props.params.restaurantId);
     }
@@ -70,9 +72,9 @@ class ReviewForm extends React.Component {
     return(
       <div className="review-form">
         <h3>Write a Review</h3>
-        <div>Restaurant Index Item</div>
-      <div className="review-input">
+        <RestaurantIndexItem restaurant={this.props.restaurant} />
         <label>Your Review</label>
+      <div className="review-input">
         <div className='review-rating'>
 
         <ul >
@@ -109,7 +111,8 @@ class ReviewForm extends React.Component {
         </ul>
         <span>Select your rating</span>
       </div>
-        <textarea value={this.state.body || ""} onChange={this.update('body').bind(this)} />
+        <textarea placeholder="Your review helps others learn about great local restaurants.
+          Please don't review this restaurant if you received a freebie for writing this review, or if you're connected in any way to the owner or employees." value={this.state.body || ""} onChange={this.update('body').bind(this)} />
       </div>
       <button className="post-review-button" onClick={this.handleSubmit().bind(this)}><span>Post Review</span></button>
     </div>

@@ -9,7 +9,7 @@ class Review < ActiveRecord::Base
   def create_date
     ymd = Date.today().to_s.split("-")
     ymd[0], ymd[1], ymd[2] = ymd[1], ymd[2], ymd[0]
-    self.date || = ymd.join("/")
+    self.date ||= ymd.join("/")
   end
 
 end

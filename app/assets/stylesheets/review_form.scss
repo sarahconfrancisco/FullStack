@@ -35,6 +35,22 @@
   height: 150px;
   padding: 2px;
   width: 100%;
+  background: rgba(250,250,249,0.9);
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.15);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+
+}
+
+.review-input {
+  box-sizing: border-box;
+  margin: 0 0 18px;
+  background: rgba(250,250,249,0.9);
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.15);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
 .highlight {
@@ -53,7 +69,7 @@
 }
 
 .review-form > h3 {
-  margin-bottom: 12px;
+  margin: 12px 0;
   font-weight: bold;
   font-size: 16px;
   line-height: 1.3125em;
@@ -61,8 +77,14 @@
 }
 
 .post-review-button {
-  padding: 5px 8px;
+  padding: 10px 8px;
   border: 1px solid #8D0005;
+  background: linear-gradient(#d90007, #c91400);
+  margin-bottom: 20px;
+}
+
+.post-review-button:hover {
+  background-color: #ed0008;
   background: linear-gradient(#ed0008, #dd1600);
 }
 
@@ -70,4 +92,35 @@
   font-size: 12px;
   font-weight: bold;
   color: white;
+}
+
+.review-form > .restaurant-index-item {
+  margin-left: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.review-form > .restaurant-index-item > div > span, .review-form > .restaurant-index-item > .left-index-item > .type-price > span {
+  font-size: 12px;
+  line-height: 1.5em;
+}
+
+.review-form > .restaurant-index-item > .left-index-item > a {
+  font-size: 12px;
+  font-weight: bold;
+  color: #0073bb;
+  line-height: 1.5em;
+}
+
+.review-form > .restaurant-index-item > .left-index-item > .res-rating > span, .review-form > .restaurant-index-item > .left-index-item >  .res-rating > ul {
+  display: none;
+}
+
+.review-form > .restaurant-index-item > .right-index-item > span:last-of-type {
+  display: none;
+}
+
+.review-form > .restaurant-index-item > .right-index-item, .review-form > .restaurant-index-item > .left-index-item {
+  margin: 0;
 }

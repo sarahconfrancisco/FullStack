@@ -31,6 +31,13 @@
 #   "{\"Mon\":{\"start\":\"8 am\",\"end\":\"5 pm\"},\"Tue\":{\"start\":\"8 am\",\"end\":\"5 pm\"},\"Wed\":{\"start\":\"8 am\",\"end\":\"5 pm\"},\"Thu\":{\"start\":\"8 am\",\"end\":\"5 pm\"},\"Fri\":{\"start\":\"8 am\",\"end\":\"5 pm\"}}",
 #  price: 1
 #   })
+RestaurantType.delete_all
+Review.delete_all
+Restaurant.delete_all
+User.delete_all
+Type.delete_all
+sarah = User.create!({fname: "Sarah", lname: "Confrancisco", email: "sarah@gmail.com", password: "confrancisco", zip: "07481"})
+guest = User.create!({fname: "guest", lname: "guest", email: "guest@gmail.com", password: "password", zip: "10001"})
 images = ["coffee.jpg", "donuts.png", "empty_restaurant.jpg", "fries.jpg", "full-bar.jpg", "hydrating-food.jpg", "images-1.jpg", "images-2.jpg", "images-3.jpg", "images-4.jpg", "images-5.jpg", "images.jpg", "macncheesejpg.jpg", "pairings-savory1-food.jpg", "peas.jpg", "sidedishes.jpg", "chicken-parmesan.jpg"]
 latitudes = (40738771..40768058).to_a
 longitudes = (-74002462..-73966031).to_a
@@ -41,7 +48,7 @@ types = []
 restaurants = []
 users = []
 
-10.times do
+20.times do
   user = User.create!({fname: Faker::Name.first_name, lname: Faker::Name.last_name, email: Faker::Internet.safe_email, zip: ZIP_CODES.sample, password: "password"})
   users.push(user)
 end
@@ -55,14 +62,14 @@ end
    longitude: (longitudes.sample / 1000000.0),
    phone: Faker::PhoneNumber.cell_phone,
    website: Faker::Internet.url,
-   delivery: Faker::Boolean(.5),
-   pick_up: Faker::Boolean(.5),
-   reservations: Faker::Boolean(.4),
-   parking: Faker::Boolean(.2),
-   outdoor: Faker::Boolean(.5),
-   credit: Faker::Boolean(.8),
-   bar: Faker::Boolean(.2),
-   byob: Faker::Boolean(.3),
+   delivery: Faker::Boolean.boolean(0.5),
+   pick_up: Faker::Boolean.boolean(0.6),
+   reservations: Faker::Boolean.boolean(0.4),
+   parking: Faker::Boolean.boolean(0.2),
+   outdoor: Faker::Boolean.boolean(0.5),
+   credit: Faker::Boolean.boolean(0.8),
+   bar: Faker::Boolean.boolean(0.2),
+   byob: Faker::Boolean.boolean(0.3),
    price: [1,2,3,4].sample,
    hours: "{\"Sun\": #{hours.sample}, \"Mon\": #{hours.sample}, \"Tue\": #{hours.sample}, \"Wed\": #{hours.sample}, \"Thu\": #{hours.sample}, \"Fri\": #{hours.sample}, \"Sat\": #{hours.sample}}"
     }
@@ -85,10 +92,12 @@ food_types.each do |type|
   types.push(ty)
 end
 
-150.times do
-  rt = RestaurantType.create!({restaurant_id: restaurants.sample.id, type_id: types.sample.id})
+Type.all.each do |type|
+  res_ids = [restaurants.sample.id, restaurants.sample.id, restaurants.sample.id, restaurants.sample.id].uniq
+  res_ids.each { |res_id| RestaurantType.create!({restaurant_id: res_id, type_id: type.id}) }
 end
 
-150.times do
-  review = Review.create!({user_id: users.sample.id, restaurant_id: restaurants.sample.id, body: Faker::Lorem.paragraph, rating: [1,2,3,4,5].sample})
+Restaurant.all.each do |res|
+  user_ids = [users.sample.id, users.sample.id, users.sample.id, users.sample.id, users.sample.id].uniq
+  user_ids.each { |user_id| review = Review.create!({user_id: user_id, restaurant_id: res.id, body: Faker::Lorem.paragraph, date: "#{(1..12).to_a.sample}/#{(1..29).to_a.sample}/2016", rating: [1,2,3,4,5].sample}) }
 end

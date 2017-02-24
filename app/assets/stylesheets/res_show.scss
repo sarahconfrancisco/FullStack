@@ -58,6 +58,7 @@
 }
 .hours li {
   float: left;
+  font-size: 14px;
 }
 
 .hours {
@@ -83,6 +84,7 @@
 
 .day {
   font-weight: bold;
+  margin-right: 18px;
 }
 
 .res-photos {
@@ -96,13 +98,6 @@
   margin: auto;
 }
 
-.res-photos > li > div {
-  box-sizing: content-box;
-  display: block;
-  border: 1px solid black;
-  height: 220px;
-  width: 220px;
-}
 
 .feature-list {
   display: flex;
@@ -131,12 +126,42 @@
     color: #d32323;
   }
 .photo-container {
+  box-sizing: content-box;
+  margin: auto 0;
   display: block;
-  height: 222px;
-  width: 222px;
+  height: 230px;
+  width: 230px;
+  transition-property: transform, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
 }
 
 .photo-container > img {
-  height: 220px;
-  width: auto;
+  height: 230px;
+  width: 230px;
+  z-index: 0;
+}
+
+.photo-container:hover {
+  width: 250px;
+  height: 250px;
+}
+
+
+
+.photo-container:hover > img {
+  transition-duration: 100ms;
+  height: 250px;
+  width: 250px;
+  box-shadow: 4px 4px 4px 4px #ccc;
+  z-index: 10;
+}
+
+.dash{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.day {
+  width: 30px;
 }

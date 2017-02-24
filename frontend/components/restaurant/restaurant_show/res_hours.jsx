@@ -9,8 +9,9 @@ const ResHours = (props) => {
       <li key={day}>
         <ul className="hours">
           <li className="day" key="day">{day}</li>
-          <li key="s">: {props.hours[day]["start"]} t</li>
-          <li key="e">o {props.hours[day]["end"]}</li>
+          <li key="s"> {props.hours[day]["start"]} </li>
+          <li key="-" className="dash">-</li>
+          <li key="e"> {props.hours[day]["end"]}</li>
         </ul>
       </li>
     );

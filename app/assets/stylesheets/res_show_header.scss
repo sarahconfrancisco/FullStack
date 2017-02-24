@@ -8,6 +8,10 @@
   width: 900px;
 }
 
+.res-header-left {
+  width: 300px;
+}
+
 .res-header-right {
   display: flex;
   margin-top: 20px;
@@ -112,6 +116,11 @@
 }
 
 .res-rating > span {
-  margin: auto;
   color: #666;
+  margin: auto 5px;
+}
+
+.address {
+  width: 290px;
+  word-wrap: break-word;
 }
