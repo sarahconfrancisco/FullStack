@@ -36,13 +36,13 @@ RestaurantType.delete_all
 # Restaurant.delete_all
 # User.delete_all
 Type.delete_all
-sarah = User.create!({fname: "Sarah", lname: "Confrancisco", email: "sarah@gmail.com", password: "confrancisco", zip: "07481"})
-guest = User.create!({fname: "guest", lname: "guest", email: "guest@gmail.com", password: "password", zip: "10001"})
-images = ["coffee.jpg", "donuts.png", "empty_restaurant.jpg", "fries.jpg", "full-bar.jpg", "hydrating-food.jpg", "images-1.jpg", "images-2.jpg", "images-3.jpg", "images-4.jpg", "images-5.jpg", "images.jpg", "macncheesejpg.jpg", "pairings-savory1-food.jpg", "peas.jpg", "sidedishes.jpg", "chicken-parmesan.jpg"]
-latitudes = (40738771..40768058).to_a
-longitudes = (-74002462..-73966031).to_a
-hours = ["{\"start\":\"8 am\",\"end\":\"5 pm\"}", "{\"start\":\"5 am\",\"end\":\"12 pm\"}", "{\"start\":\"11 am\",\"end\":\"11 pm\"}", "{\"start\":\"12 am\",\"end\":\"12 pm\"}"]
-ZIP_CODES = ["10001", "10011", "10018", "10019", "10020", "10036", "10029", "10035", "10010", "10016", "10017", "10022", "10012", "10013", "10014"]
+# sarah = User.create!({fname: "Sarah", lname: "Confrancisco", email: "sarah@gmail.com", password: "confrancisco", zip: "07481"})
+# guest = User.create!({fname: "guest", lname: "guest", email: "guest@gmail.com", password: "password", zip: "10001"})
+# images = ["coffee.jpg", "donuts.png", "empty_restaurant.jpg", "fries.jpg", "full-bar.jpg", "hydrating-food.jpg", "images-1.jpg", "images-2.jpg", "images-3.jpg", "images-4.jpg", "images-5.jpg", "images.jpg", "macncheesejpg.jpg", "pairings-savory1-food.jpg", "peas.jpg", "sidedishes.jpg", "chicken-parmesan.jpg"]
+# latitudes = (40738771..40768058).to_a
+# longitudes = (-74002462..-73966031).to_a
+# hours = ["{\"start\":\"8 am\",\"end\":\"5 pm\"}", "{\"start\":\"5 am\",\"end\":\"12 pm\"}", "{\"start\":\"11 am\",\"end\":\"11 pm\"}", "{\"start\":\"12 am\",\"end\":\"12 pm\"}"]
+# ZIP_CODES = ["10001", "10011", "10018", "10019", "10020", "10036", "10029", "10035", "10010", "10016", "10017", "10022", "10012", "10013", "10014"]
 food_types = %w( breakfast lunch dinner pizza tacos donuts coffee brunch burgers halal )
 types = []
 restaurants = []
