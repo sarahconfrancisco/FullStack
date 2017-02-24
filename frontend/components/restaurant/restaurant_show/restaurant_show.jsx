@@ -37,9 +37,8 @@ class RestaurantShow extends React.Component {
         <div className="map-photos">
           <div className="map-address">
             <div id="map">
-              <img src={`https://maps.googleapis.com/maps/api/staticmap?center=${this.props.restaurant.zip}&size=300x300
-&markers=color:red%7Clabel:C%7C${this.props.restaurant.latitude.toString()},${this.props.restaurant.longitude.toString()}
-&key=AIzaSyCeNvQ8uvwW-dHA9Xo4CHXiUF9hTWLBXVU`} />
+              <img src={`https://maps.googleapis.com/maps/api/staticmap?center=${this.props.restaurant.zip}&size=285x135
+&markers=color:red%7Clabel:C%7C${this.props.restaurant.latitude.toString()},${this.props.restaurant.longitude.toString()}`} />
             </div>
             <ResAddress
               address={this.props.restaurant.address}
