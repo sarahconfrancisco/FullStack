@@ -25,17 +25,22 @@
   flex-direction: column;
 }
 
-
+.left-index-item > a {
+  color: #0073BB;
+  margin: 2px 0;
+}
 
 .index-stars {
   display: flex;
 }
 
-
+.right-index-item > span {
+  font-size: 15px;
+}
 
 .left-index-item > div > span {
-  margin: 2px;
-}
+  margin: auto 2px;
+  }
 
 #map-container {
     display: block;
@@ -45,7 +50,9 @@
     position: static;
 }
 
-
+.left-index-item > div {
+  margin: 2px 0;
+}
 
 .main-search{
   display: flex;

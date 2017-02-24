@@ -61,3 +61,7 @@ input, select {
 textarea {
   font-size: 14px;
 }
+
+textarea:focus {
+  outline: none;
+}

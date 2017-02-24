@@ -35,6 +35,14 @@
 .address {
   font-size: 16px;
   padding: 5px;
+  cursor: default;
+}
+
+.address > span > a {
+  text-decoration: none;
+  cursor: pointer;
+  margin-left: 5px;
+  word-wrap: break-word;
 }
 
 #street, #city-zip{

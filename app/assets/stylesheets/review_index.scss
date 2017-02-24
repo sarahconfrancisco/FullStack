@@ -28,11 +28,18 @@
 }
 
 .left-review-item {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: 150px;
   text-align: center;
   margin-right: 5px;
+}
+
+.review-form > label {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 6px;
 }
 
 .left-review-item > span {
@@ -53,8 +60,8 @@
 }
 
 .smallest-star {
-  height: 25px;
-  width: 25px;
+  height: 18px;
+  width: 18px;
   margin: 1px;
   display: flex;
   justify-content: center;
@@ -63,7 +70,7 @@
 }
 
 .smallest-star > img {
-  height: 18px;
+  height: 14px;
   margin: auto;
   display: block;
   border: none;
@@ -93,4 +100,8 @@
   color: #d32323;
   font-weight: bold;
   margin-bottom: 6px;
+}
+
+.index-stars > span {
+  font-size: 14px;
 }

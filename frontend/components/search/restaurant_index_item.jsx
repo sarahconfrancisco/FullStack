@@ -42,7 +42,9 @@ const makeTinyStars = (rating) => {
 const RestaurantIndexItem = (props) => {
   const tinyStars = makeTinyStars(props.restaurant.rating);
   const price = "$".repeat(parseInt(props.restaurant.price));
-  const types = (props.restaurant.types.map((type) => <a key={type}> {type} </a>));
+  const typeArray = props.restaurant.types.join(", ").split(" ");
+
+  const types = (typeArray.map((type) => <a key={type}>{type} </a>));
   return(
     <div className="restaurant-index-item">
       <div className="left-index-item">
