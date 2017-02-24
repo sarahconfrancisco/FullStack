@@ -32,9 +32,9 @@
 #  price: 1
 #   })
 RestaurantType.delete_all
-Review.delete_all
-Restaurant.delete_all
-User.delete_all
+# Review.delete_all
+# Restaurant.delete_all
+# User.delete_all
 Type.delete_all
 sarah = User.create!({fname: "Sarah", lname: "Confrancisco", email: "sarah@gmail.com", password: "confrancisco", zip: "07481"})
 guest = User.create!({fname: "guest", lname: "guest", email: "guest@gmail.com", password: "password", zip: "10001"})
@@ -43,50 +43,50 @@ latitudes = (40738771..40768058).to_a
 longitudes = (-74002462..-73966031).to_a
 hours = ["{\"start\":\"8 am\",\"end\":\"5 pm\"}", "{\"start\":\"5 am\",\"end\":\"12 pm\"}", "{\"start\":\"11 am\",\"end\":\"11 pm\"}", "{\"start\":\"12 am\",\"end\":\"12 pm\"}"]
 ZIP_CODES = ["10001", "10011", "10018", "10019", "10020", "10036", "10029", "10035", "10010", "10016", "10017", "10022", "10012", "10013", "10014"]
-food_types = %w(Afghan African American Arabian Argentine Armenian Australian Austrian Bangladeshi Barbeque Basque Belgian Brasseries Brazilian Breakfast Brunch British Buffets Burgers Burmese Cafes Cafeteria Cajun/Creole Cambodian Caribbean Catalan Cheesesteaks Chicken Chinese Comfort Creperies Cuban Czech Delis Diners Dinner Ethiopian Fast-Food Filipino Fish&Chips Fondue Food-Court Food-Stand French Gastropubs German Gluten-Free Greek Guamanian Halal Hawaiian Himalayan/Nepalese Honduran Hungarian Iberian Indian Indonesian Irish Italian Japanese Kebab Korean Kosher Laotian Live/Raw Malaysian Mediterranean Mexican Mongolian Moroccan Nicaraguan Noodles Pakistani Pan-Asian Persian/Iranian Peruvian Pizza Polish Pop-Up Portuguese Poutineries Russian Salad Sandwiches Scandinavian Scottish Seafood Singaporean Slovakian Soul Soup Southern Spanish Steakhouses Supper Sushi Syrian Taiwanese Tapas Tex-Mex Thai Turkish Ukrainian Uzbek Vegan Vegetarian Vietnamese Waffles Wraps)
+food_types = %w( breakfast lunch dinner pizza tacos donuts coffee brunch burgers halal )
 types = []
 restaurants = []
-users = []
+users = User.all
 
-20.times do
-  user = User.create!({fname: Faker::Name.first_name, lname: Faker::Name.last_name, email: Faker::Internet.safe_email, zip: ZIP_CODES.sample, password: "password"})
-  users.push(user)
-end
-
-50.times do
-  res = Restaurant.new(
-  {
-   user_id: users.sample.id,
-   name: Faker::Book.title,
-   latitude: (latitudes.sample / 1000000.0),
-   longitude: (longitudes.sample / 1000000.0),
-   phone: Faker::PhoneNumber.cell_phone,
-   website: Faker::Internet.url,
-   delivery: Faker::Boolean.boolean(0.5),
-   pick_up: Faker::Boolean.boolean(0.6),
-   reservations: Faker::Boolean.boolean(0.4),
-   parking: Faker::Boolean.boolean(0.2),
-   outdoor: Faker::Boolean.boolean(0.5),
-   credit: Faker::Boolean.boolean(0.8),
-   bar: Faker::Boolean.boolean(0.2),
-   byob: Faker::Boolean.boolean(0.3),
-   price: [1,2,3,4].sample,
-   hours: "{\"Sun\": #{hours.sample}, \"Mon\": #{hours.sample}, \"Tue\": #{hours.sample}, \"Wed\": #{hours.sample}, \"Thu\": #{hours.sample}, \"Fri\": #{hours.sample}, \"Sat\": #{hours.sample}}"
-    }
-  )
-  res.image_1 = File.open("app/assets/images/#{images.sample}")
-  res.image_2 = File.open("app/assets/images/#{images.sample}")
-  res.image_3 = File.open("app/assets/images/#{images.sample}")
-
-  address_array = res.location.split(",")
-  res.address = address_array[0]
-  res.city = address_array[1] || "New York"
-  res.state = address_array[2].split(" ")[0] || "NY"
-  res.zip = address_array[2].split(" ")[1] || "10001"
-  res.save!
-  restaurants.push(res)
-
-end
+# 20.times do
+#   user = User.create!({fname: Faker::Name.first_name, lname: Faker::Name.last_name, email: Faker::Internet.safe_email, zip: ZIP_CODES.sample, password: "password"})
+#   users.push(user)
+# end
+#
+# 50.times do
+#   res = Restaurant.new(
+#   {
+#    user_id: users.sample.id,
+#    name: Faker::Book.title,
+#    latitude: (latitudes.sample / 1000000.0),
+#    longitude: (longitudes.sample / 1000000.0),
+#    phone: Faker::PhoneNumber.cell_phone,
+#    website: Faker::Internet.url,
+#    delivery: Faker::Boolean.boolean(0.5),
+#    pick_up: Faker::Boolean.boolean(0.6),
+#    reservations: Faker::Boolean.boolean(0.4),
+#    parking: Faker::Boolean.boolean(0.2),
+#    outdoor: Faker::Boolean.boolean(0.5),
+#    credit: Faker::Boolean.boolean(0.8),
+#    bar: Faker::Boolean.boolean(0.2),
+#    byob: Faker::Boolean.boolean(0.3),
+#    price: [1,2,3,4].sample,
+#    hours: "{\"Sun\": #{hours.sample}, \"Mon\": #{hours.sample}, \"Tue\": #{hours.sample}, \"Wed\": #{hours.sample}, \"Thu\": #{hours.sample}, \"Fri\": #{hours.sample}, \"Sat\": #{hours.sample}}"
+#     }
+#   )
+#   res.image_1 = File.open("app/assets/images/#{images.sample}")
+#   res.image_2 = File.open("app/assets/images/#{images.sample}")
+#   res.image_3 = File.open("app/assets/images/#{images.sample}")
+#
+#   address_array = res.location.split(",")
+#   res.address = address_array[0]
+#   res.city = address_array[1] || "New York"
+#   res.state = address_array[2].split(" ")[0] || "NY"
+#   res.zip = address_array[2].split(" ")[1] || "10001"
+#   res.save!
+#   restaurants.push(res)
+#
+# end
 
 food_types.each do |type|
   ty = Type.create!({name: type})
