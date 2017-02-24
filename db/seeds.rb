@@ -44,9 +44,9 @@ Type.delete_all
 # hours = ["{\"start\":\"8 am\",\"end\":\"5 pm\"}", "{\"start\":\"5 am\",\"end\":\"12 pm\"}", "{\"start\":\"11 am\",\"end\":\"11 pm\"}", "{\"start\":\"12 am\",\"end\":\"12 pm\"}"]
 # ZIP_CODES = ["10001", "10011", "10018", "10019", "10020", "10036", "10029", "10035", "10010", "10016", "10017", "10022", "10012", "10013", "10014"]
 food_types = %w( breakfast lunch dinner pizza tacos donuts coffee brunch burgers halal )
-types = []
 restaurants = []
 users = User.all
+types = []
 
 # 20.times do
 #   user = User.create!({fname: Faker::Name.first_name, lname: Faker::Name.last_name, email: Faker::Internet.safe_email, zip: ZIP_CODES.sample, password: "password"})
@@ -97,5 +97,5 @@ Restaurant.all.each do |res|
   # user_ids = [users.sample.id, users.sample.id, users.sample.id, users.sample.id, users.sample.id].uniq
   type_ids = [types.sample.id, types.sample.id, types.sample.id, types.sample.id].uniq
   # user_ids.each { |user_id| review = Review.create!({user_id: user_id, restaurant_id: res.id, body: Faker::Lorem.paragraph, date: "#{(1..12).to_a.sample}/#{(1..29).to_a.sample}/2016", rating: [1,2,3,4,5].sample}) }
-  # type_ids.each { |type_id| res_type = RestaurantType.create!({restaurant_id: res.id, type_id: type_id}) }
+  type_ids.each { |type_id| res_type = RestaurantType.create!({restaurant_id: res.id, type_id: type_id}) }
 end
