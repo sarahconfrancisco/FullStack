@@ -94,8 +94,8 @@ food_types.each do |type|
 end
 
 Restaurant.all.each do |res|
-  user_ids = [users.sample.id, users.sample.id, users.sample.id, users.sample.id, users.sample.id].uniq
+  # user_ids = [users.sample.id, users.sample.id, users.sample.id, users.sample.id, users.sample.id].uniq
   type_ids = [types.sample.id, types.sample.id, types.sample.id, types.sample.id].uniq
-  user_ids.each { |user_id| review = Review.create!({user_id: user_id, restaurant_id: res.id, body: Faker::Lorem.paragraph, date: "#{(1..12).to_a.sample}/#{(1..29).to_a.sample}/2016", rating: [1,2,3,4,5].sample}) }
-  type_ids.each { |type_id| res_type = RestaurantType.create!({restaurant_id: res.id, type_id: type_id}) }
+  # user_ids.each { |user_id| review = Review.create!({user_id: user_id, restaurant_id: res.id, body: Faker::Lorem.paragraph, date: "#{(1..12).to_a.sample}/#{(1..29).to_a.sample}/2016", rating: [1,2,3,4,5].sample}) }
+  # type_ids.each { |type_id| res_type = RestaurantType.create!({restaurant_id: res.id, type_id: type_id}) }
 end
