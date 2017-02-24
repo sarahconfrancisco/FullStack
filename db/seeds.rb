@@ -80,8 +80,9 @@ end
 
   address_array = res.location.split(",")
   res.address = address_array[0]
-  res.city = address_array[1]
-  res.state, res.zip = address_array[2].split(" ")
+  res.city = address_array[1] || "New York"
+  res.state = address_array[2].split(" ")[0] || "NY"
+  res.zip = address_array[2].split(" ")[1] || "10001"
   res.save!
   restaurants.push(res)
 
@@ -92,12 +93,9 @@ food_types.each do |type|
   types.push(ty)
 end
 
-Type.all.each do |type|
-  res_ids = [restaurants.sample.id, restaurants.sample.id, restaurants.sample.id, restaurants.sample.id].uniq
-  res_ids.each { |res_id| RestaurantType.create!({restaurant_id: res_id, type_id: type.id}) }
-end
-
 Restaurant.all.each do |res|
   user_ids = [users.sample.id, users.sample.id, users.sample.id, users.sample.id, users.sample.id].uniq
+  type_ids = [types.sample.id, types.sample.id, types.sample.id, types.sample.id].uniq
   user_ids.each { |user_id| review = Review.create!({user_id: user_id, restaurant_id: res.id, body: Faker::Lorem.paragraph, date: "#{(1..12).to_a.sample}/#{(1..29).to_a.sample}/2016", rating: [1,2,3,4,5].sample}) }
+  type_ids.each { |type_id| res_type = RestaurantType.create!({restaurant_id: res.id, type_id: type_id}) }
 end
