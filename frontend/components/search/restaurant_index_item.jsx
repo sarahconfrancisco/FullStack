@@ -56,7 +56,7 @@ const RestaurantIndexItem = (props) => {
           <span>{props.restaurant.num_reviews} reviews</span>
         </div>
         <div className="type-price">
-          <span>{price} • {types}</span>
+          <span>{price} <p className="bullet">•</p> {types}</span>
         </div>
       </div>
       <div className="right-index-item">
