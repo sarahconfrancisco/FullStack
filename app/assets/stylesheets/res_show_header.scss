@@ -10,6 +10,8 @@
 
 .res-header-left {
   width: 300px;
+  display: flex;
+  flex-direction: column;
 }
 
 .res-header-right {
@@ -20,6 +22,10 @@
 .res-header-right > button {
   margin-left: 8px;
   margin-right: 8px;
+}
+
+.type-price {
+  margin-top: 10px;
 }
 
 .type-price > span > a {
