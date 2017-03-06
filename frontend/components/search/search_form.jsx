@@ -13,10 +13,10 @@ class SearchForm extends React.Component {
   handleSubmit(){
     return((e) => {
       e.preventDefault();
-      const zip = this.state.zip;
+      const location = this.state.location;
       const types = this.state.types;
       const features = this.state.features;
-      this.props.fetchSearchRestaurants(types, features, zip);
+      this.props.fetchSearchRestaurants(types, features, location);
     });
   }
 
@@ -61,7 +61,7 @@ class SearchForm extends React.Component {
           <span>Find</span>
           <input value={this.state.types} placeholder="breakfast, coffee" onChange={this.update('types').bind(this)} />
           <span>Near</span>
-          <input type="text" value={this.state.zip} placeholder="10001" onChange={this.update('zip').bind(this)} />
+          <input type="text" value={this.state.location} placeholder="10001" onChange={this.update('location').bind(this)} />
           <button onClick={this.handleSubmit().bind(this)} className="search-button">
             <img src={window.images.magnifying_glass_icon} />
           </button>

@@ -10,7 +10,7 @@ class SearchPage extends React.Component {
   }
 
   render(){
-    const zip = this.props.params.zip ? this.props.params.zip : this.props.userZip
+    const zip = this.props.userZip
     return(<div>
       <div className="top-search">
         <SearchForm params={this.props.params} fetchSearchRestaurants={ this.props.fetchSearchRestaurants } />
@@ -18,7 +18,7 @@ class SearchPage extends React.Component {
 
       <div className="main-search">
         <RestaurantIndex restaurants={this.props.results} />
-        <RestaurantMap restaurants={this.props.results} zip={ zip } />
+        <RestaurantMap restaurants={this.props.results} zip={ zip } latlng={ this.props.latlng } />
       </div>
     </div>);
   }

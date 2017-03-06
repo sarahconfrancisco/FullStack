@@ -12,7 +12,8 @@ const mapStateToProps = (state) => {
   return{
   results: state.search.results,
   params: state.search.params,
-  userZip: userZip
+  userZip: userZip,
+  latlng: state.search.latlng
 }};
 
 const mapDispatchToProps = (dispatch) => ({

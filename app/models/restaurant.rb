@@ -1,4 +1,9 @@
 class Restaurant < ActiveRecord::Base
+  include PgSearch
+  multisearchable :against => [:city, :state, :zip]
+  pg_search_scope :by_type, :associated_against => {
+    :types => [:name]
+  }
   belongs_to :user
   after_initialize :geocode, :reverse_geocode, :ensure_hours
   geocoded_by :full_address
@@ -20,21 +25,13 @@ class Restaurant < ActiveRecord::Base
 
   validates :name, :price, :address, :city, :state, :zip, :phone, :hours, :user, presence: true
 
-  def self.has_types(types, zip)
-    zip = "'" + zip.to_s + "'"
-    types = types.map{ |t| "'" + t + "'"}.join(", ")
-    self.find_by_sql(<<-SQL)
-      SELECT
-        DISTINCT(restaurants.*)
-      FROM
-        restaurants
-        JOIN restaurant_types
-          ON restaurants.id = restaurant_types.restaurant_id
-        JOIN types
-          ON types.id = restaurant_types.type_id
-        WHERE
-          types.name IN (#{types}) AND zip = #{zip}
-    SQL
+  def self.has_types(types, location)
+    PgSearch.multisearch("#{location}").includes(:searchable).map { |rec| rec.searchable}.select { |res| (res.type_names & types).any? }
+
+  end
+
+  def type_names
+    self.types.map {|type| type.name }
   end
 
   def full_address

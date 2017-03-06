@@ -11,5 +11,9 @@ json.set! :params do
   json.features do
     json.array! @features
   end
-  json.zip @zip
+  json.location @location
+end
+json.set! :latlng do
+  json.lat @lat
+  json.lng @lng
 end
