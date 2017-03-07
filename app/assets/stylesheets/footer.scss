@@ -24,3 +24,10 @@
 .footer > ul > li {
   display: inline;
 }
+.footer > ul > li > ul > li{
+  margin-bottom: 5px;
+}
+.footer > ul > li > ul > li > h5 {
+  font-weight: bold;
+  margin: 20px 0 10px 0;
+}
