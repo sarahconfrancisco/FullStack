@@ -47,7 +47,6 @@ class Header extends React.Component {
     return(
       <nav className="header">
         {(this.props.currentUser && this.props.currentUser.id) ?   <Link>
-          Add Your Restaurant
           </Link>
         : <Link></Link>}
 
