@@ -4,13 +4,15 @@ import ErrorReducer from './error_reducer';
 import RestaurantReducer from './restaurant_reducer';
 import ReviewReducer from './review_reducer';
 import SearchReducer from './search_reducer';
+import LoadingReducer from './loading_reducer';
 
 const RootReducer = combineReducers({
   currentUser: SessionReducer,
   errors: ErrorReducer,
   restaurant: RestaurantReducer,
   reviewIndex: ReviewReducer,
-  search: SearchReducer
+  search: SearchReducer,
+  loading: LoadingReducer
 });
 
 export default RootReducer;
