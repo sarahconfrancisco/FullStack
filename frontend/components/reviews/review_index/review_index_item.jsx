@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ReviewIndexItem = (props) => {
-  if(!props.review.user){
+  if(!props.review || !props.review.user){
     return(<div></div>);
   }
   return(

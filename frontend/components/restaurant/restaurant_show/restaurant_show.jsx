@@ -5,19 +5,20 @@ import ResHours from './res_hours';
 import ResFeature from './res_features';
 import ReviewIndexContainer from '../../reviews/review_index/review_index_container';
 import  { Link, withRouter } from 'react-router';
+import LoadingIcon from '../../loading_icon';
 
 class RestaurantShow extends React.Component {
   constructor(props){
     super(props);
   }
 
-  componentDidMount(){
+  componentWillMount(){
     this.props.showRestaurant(this.props.params.restaurantId);
   }
 
   render(){
-    if(!this.props.restaurant.name){
-      return(<div></div>);
+    if(this.props.loading || !this.props.restaurant.name){
+      return(<LoadingIcon />);
     }
     return(
       <div className="res-show">

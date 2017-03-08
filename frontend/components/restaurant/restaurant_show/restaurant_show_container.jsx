@@ -5,7 +5,8 @@ import RestaurantShow from './restaurant_show';
 const mapStateToProps = (state, { location }) => {
   return({
     restaurant: state.restaurant,
-    errors: state.errors
+    errors: state.errors,
+    loading: state.loading.restaurantLoading
   });
 };
 
