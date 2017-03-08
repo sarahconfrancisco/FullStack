@@ -18,7 +18,7 @@ class Restaurant < ActiveRecord::Base
   has_attached_file :image_3, default_url: "pasta.jpg"
   validates_attachment_content_type :image_3, content_type: /\Aimage\/.*\Z/
 
-  attr_accessor :rating, :num_reviews, :location
+  attr_accessor :location
 
   validates_uniqueness_of :name, scope: [:latitude, :longitude]
   after_validation :geocode, :if => lambda{ |obj| obj.address_changed? || obj.city_changed? || obj.zip_changed? }
@@ -26,8 +26,25 @@ class Restaurant < ActiveRecord::Base
   validates :name, :price, :address, :city, :state, :zip, :phone, :hours, :user, presence: true
 
   def self.has_types(types, location)
-    PgSearch.multisearch("#{location}").includes(:searchable).map { |rec| rec.searchable}.select { |res| (res.type_names & types).any? }
+    types = types.map { |ty|   "'" + ty + "'"}.join(', ')
+    search = Restaurant.find_by_sql([<<-SQL, location, location, location])
+      SELECT
+        restaurants.*
+      FROM
+        restaurants
+        LEFT JOIN
+          restaurant_types
+          ON
+          restaurant_types.restaurant_id = restaurants.id
+        LEFT JOIN
+          types
+          ON
+          types.id = restaurant_types.type_id
+      WHERE
+        (restaurants.city = ? OR restaurants.state = ? OR restaurants.zip = ?)
+        AND types.name IN (#{types})
 
+    SQL
   end
 
   def type_names
@@ -46,6 +63,29 @@ class Restaurant < ActiveRecord::Base
 
   def num_reviews
     self.reviews.count
+  end
+
+  def self.has_types_location_features(types, location, features)
+    types = types.map { |ty|   "'" + ty + "'"}.join(', ')
+    features = features.map { |feat| 'restaurants.' + feat + ' = true' }.join(" AND ")
+    search = Restaurant.find_by_sql([<<-SQL, location, location, location])
+      SELECT
+        restaurants.*
+      FROM
+        restaurants
+        LEFT JOIN
+          restaurant_types
+          ON
+          restaurant_types.restaurant_id = restaurants.id
+        LEFT JOIN
+          types
+          ON
+          types.id = restaurant_types.type_id
+      WHERE
+        (restaurants.city = ? OR restaurants.state = ? OR restaurants.zip = ?)
+        AND types.name IN (#{types}) AND #{features}
+
+    SQL
   end
 
   private

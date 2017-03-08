@@ -46,17 +46,15 @@ class Api::RestaurantsController < ApplicationController
     features = params[:features]
     types = params[:types].downcase.delete(" ").split(",")
     location = params[:zip]
-    restaurants = Restaurant.has_types(types, location)
     if features
-      features.each do |feat|
-        restaurants = restaurants.select { |res| res[feat] == true }
-      end
+      @restaurants = Restaurant.has_types_location_features(types, location, features)
+    else
+      @restaurants = Restaurant.has_types(types, location)
     end
-    @restaurants = restaurants
     @types = params[:types]
     @location = params[:zip]
-    @lat = restaurants.map {|res| res.latitude }.sum / restaurants.count
-    @lng = restaurants.map {|res| res.longitude }.sum / restaurants.count
+    @lat = @restaurants.map {|res| res.latitude }.sum / @restaurants.count
+    @lng = @restaurants.map {|res| res.longitude }.sum / @restaurants.count
     @features = params[:features]
   end
 
