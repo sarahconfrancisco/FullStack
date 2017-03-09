@@ -46,15 +46,30 @@ class Api::RestaurantsController < ApplicationController
     features = params[:features]
     types = params[:types].downcase.delete(" ").split(",")
     location = params[:zip]
-    if features
+    @restaurants = []
+    if features && types.length > 0 && location
       @restaurants = Restaurant.has_types_location_features(types, location, features)
-    else
-      @restaurants = Restaurant.has_types(types, location)
+    elsif types.length > 0 && location
+      @restaurants = Restaurant.has_types_location(types, location)
+    elsif types.length > 0 && features
+      @restaurants = Restaurant.has_types_features(types, features)
+    elsif features && location
+      @restaurants = Restaurant.has_features_location(features, location)
+    elsif types.length > 0
+      @restaurants = Restaurant.has_types(types)
+    elsif features
+      @restaurants = Restaurant.has_features(features)
+    elsif location
+      @restaurants = Restaurant.has_location(location)
     end
+
+    @restaurants = Restaurant.highest_rated if @restaurants.length < 1
     @types = params[:types]
     @location = params[:zip]
-    @lat = @restaurants.map {|res| res.latitude }.sum / @restaurants.count
-    @lng = @restaurants.map {|res| res.longitude }.sum / @restaurants.count
+    if(@restaurants.count > 0)
+      @lat = @restaurants.map {|res| res.latitude }.sum / @restaurants.count
+      @lng = @restaurants.map {|res| res.longitude }.sum / @restaurants.count
+    end
     @features = params[:features]
   end
 
