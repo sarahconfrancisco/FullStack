@@ -1,11 +1,27 @@
 # README
 
-Welp is a full-stack web application to search for, rate, and review restaurants based off the website Yelp. It uses a PostgreSQL database, a Ruby on Rails MVC framework, React.js with a Redux architecture framework for rendered components and CSS3 for styling. [Click here](wwww.welpthatsdinner.com) for the live website.  
+Welp is a full-stack web application to search for, rate, and review restaurants based off the website Yelp. It uses a PostgreSQL database, a Ruby on Rails 4.2.7.1 MVC framework written in Ruby 2.3.1, React.js 15.4.2 with a Redux 3.6.0 architecture framework for rendered components written in ES6 JavaScript and CSS3 for styling. [Click here](wwww.welpthatsdinner.com) for the live website.  
 
-## Application Walkthrough
+## How to Use
+
+### Pages
+#### Login / Sign Up
+#### Search Page
+#### Restaurant Show
+#### Review Form
+
+### Download and Set Up
+
+## Google Maps and Geocoder
+
+### Finding Restaurant Latitude and Longitude
+### Restaurants Searched For
+### Static Images
+
+## High View Application Walkthrough
 
 ### Database
-There are tables for users, restaurants, types (of food), a table to link restaurants and types; restaurant_types, and reviews. All were created using ActiveRecord and are stored in a Postgres database.
+There are tables for users, restaurants, types (of food), a table to link restaurants and types; restaurant_types, and reviews. All were created using ActiveRecord and are stored in a Postgres 0.15 database.
 
 ```Ruby
 create_table "reviews", force: :cascade do |t|
@@ -72,7 +88,19 @@ end
 ```
 
 ### Views
-A RESTful naming convention makes it easy for rails to know what controller method to go to based on the route and url verb and what view to render given the controller method. The controllers and views are nested under an API namespace. All views deconstruct model instances fetched by the controllers into JSON using jBuilder to match the frontend which is written in javascript. The current user is bootstrapped onto the window on the root page to allow users to remain logged in.
+A RESTful naming convention makes it easy for rails to know what controller method to go to based on the route and url verb and what view to render given the controller method. The controllers and views are nested under an API namespace. All views deconstruct model instances fetched by the controllers into JSON using jBuilder 2.0 to match the frontend which is written in javascript. The current user is bootstrapped onto the window on the root page to allow users to remain logged in.
+
+```Ruby
+namespace :api, defaults: {format: :json} do
+  resources :users, only: [:create]
+  resource :session, only: [:create, :destroy]
+  resources :restaurants, only: [:create, :show, :update, :index]
+  resources :reviews, only: [:create, :show, :update, :index]
+end
+root "static_pages#root"
+
+end
+```
 
 ```Ruby
 json.extract! @review, :id, :rating, :body, :date
