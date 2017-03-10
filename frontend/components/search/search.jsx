@@ -13,7 +13,6 @@ class SearchPage extends React.Component {
   componentWillMount(){
     if(!this.props.params.zip && !this.props.params.types && !this.props.params.features.length){
       this.props.fetchSearchRestaurants("", [], "")
-      console.log(this.props.params);
     }
   }
 

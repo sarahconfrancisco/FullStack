@@ -47,19 +47,19 @@ class Api::RestaurantsController < ApplicationController
     types = params[:types].downcase.delete(" ").split(",")
     location = params[:zip]
     @restaurants = []
-    if features && types.length > 0 && location
+    if features && types.length > 0 && location.length > 0
       @restaurants = Restaurant.has_types_location_features(types, location, features)
-    elsif types.length > 0 && location
+    elsif types.length > 0 && location.length > 0
       @restaurants = Restaurant.has_types_location(types, location)
     elsif types.length > 0 && features
       @restaurants = Restaurant.has_types_features(types, features)
-    elsif features && location
+    elsif features && location.length > 0
       @restaurants = Restaurant.has_features_location(features, location)
     elsif types.length > 0
       @restaurants = Restaurant.has_types(types)
     elsif features
       @restaurants = Restaurant.has_features(features)
-    elsif location
+    elsif location.length > 0
       @restaurants = Restaurant.has_location(location)
     end
 

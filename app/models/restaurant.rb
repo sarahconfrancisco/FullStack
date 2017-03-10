@@ -26,9 +26,9 @@ class Restaurant < ActiveRecord::Base
   validates :name, :price, :address, :city, :state, :zip, :phone, :hours, :user, presence: true
 
   def self.has_types_location_features(types, location, features)
-    types = types.map{ |ty| "'" + ty + "'"}.join(', ')
+    type_q_marks, type_names = sanitize_types(types)
     features = features.map { |feat| 'restaurants.' + feat + ' = true' }.join(" AND ")
-    search = Restaurant.find_by_sql([<<-SQL, location, location, location])
+    search = Restaurant.find_by_sql([<<-SQL, location, location, location, *type_names])
       SELECT
         restaurants.*
       FROM
@@ -43,15 +43,15 @@ class Restaurant < ActiveRecord::Base
           types.id = restaurant_types.type_id
       WHERE
         (restaurants.city LIKE ? OR restaurants.state LIKE ? OR restaurants.zip LIKE ?)
-        AND types.name IN (#{types}) AND #{features}
+        AND types.name IN (#{type_q_marks}) AND #{features}
 
     SQL
 
   end
 
   def self.has_types_location(types, location)
-    types = types.map { |ty|   "'" + ty + "'"}.join(', ')
-    search = Restaurant.find_by_sql([<<-SQL, location, location, location])
+    type_q_marks, type_names = sanitize_types(types)
+    search = Restaurant.find_by_sql([<<-SQL, location, location, location, *type_names])
       SELECT
         restaurants.*
       FROM
@@ -66,15 +66,15 @@ class Restaurant < ActiveRecord::Base
           types.id = restaurant_types.type_id
       WHERE
         (restaurants.city = ? OR restaurants.state = ? OR restaurants.zip = ?)
-        AND types.name IN (#{types})
+        AND types.name IN (#{type_q_marks})
 
     SQL
   end
 
   def self.has_types_features(types, features)
-    types = types.map{ |ty| "'" + ty + "'"}.join(', ')
+    type_q_marks, type_names = sanitize_types(types)
     features = features.map { |feat| 'restaurants.' + feat + ' = true' }.join(" AND ")
-    search = Restaurant.find_by_sql([<<-SQL])
+    search = Restaurant.find_by_sql([<<-SQL, *type_names])
       SELECT
         restaurants.*
       FROM
@@ -88,14 +88,14 @@ class Restaurant < ActiveRecord::Base
           ON
           types.id = restaurant_types.type_id
       WHERE
-         types.name IN (#{types}) AND #{features}
+         types.name IN (#{type_q_marks}) AND #{features}
 
     SQL
   end
 
   def self.has_types(types)
-    types = types.map{ |ty| "'" + ty + "'"}.join(', ')
-    search = Restaurant.find_by_sql([<<-SQL])
+    type_q_marks, type_names = sanitize_types(types)
+    search = Restaurant.find_by_sql([<<-SQL, *type_names])
       SELECT
         restaurants.*
       FROM
@@ -113,7 +113,7 @@ class Restaurant < ActiveRecord::Base
         ON
           types.id = restaurant_types.type_id
       WHERE
-        types.name IN (#{types})
+        types.name IN (#{type_q_marks})
       GROUP BY
         restaurants.id
       ORDER BY
@@ -221,7 +221,17 @@ class Restaurant < ActiveRecord::Base
   end
 
 
+  def self.sanitize_types(types)
+    q_marks = []
+    vals = []
+    types.each do |ty|
+      q_marks << "?"
+      vals << ty
+    end
+    [q_marks.join(", "), vals]
+  end
   private
+
 
   def ensure_hours
     self.hours ||= "{\"Mon\":{\"start\":\"8 am\",\"end\":\"5 pm\"},\"Tue\":{\"start\":\"8 am\",\"end\":\"5 pm\"},\"Wed\":{\"start\":\"8 am\",\"end\":\"5 pm\"},\"Thu\":{\"start\":\"8 am\",\"end\":\"5 pm\"},\"Fri\":{\"start\":\"8 am\",\"end\":\"5 pm\"}}"
