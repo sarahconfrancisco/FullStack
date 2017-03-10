@@ -46,7 +46,7 @@ class Restaurant < ActiveRecord::Base
         AND types.name IN (#{types}) AND #{features}
 
     SQL
-    
+
   end
 
   def self.has_types_location(types, location)
