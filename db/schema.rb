@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227145623) do
+ActiveRecord::Schema.define(version: 20170310180307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 20170227145623) do
   end
 
   add_index "restaurant_types", ["restaurant_id", "type_id"], name: "index_restaurant_types_on_restaurant_id_and_type_id", unique: true, using: :btree
+  add_index "restaurant_types", ["restaurant_id"], name: "index_restaurant_types_on_restaurant_id", using: :btree
+  add_index "restaurant_types", ["type_id"], name: "index_restaurant_types_on_type_id", using: :btree
 
   create_table "restaurants", force: :cascade do |t|
     t.integer  "user_id",                              null: false
@@ -72,8 +74,10 @@ ActiveRecord::Schema.define(version: 20170227145623) do
     t.datetime "image_3_updated_at"
   end
 
+  add_index "restaurants", ["address"], name: "index_restaurants_on_address", using: :btree
   add_index "restaurants", ["bar"], name: "index_restaurants_on_bar", using: :btree
   add_index "restaurants", ["byob"], name: "index_restaurants_on_byob", using: :btree
+  add_index "restaurants", ["city"], name: "index_restaurants_on_city", using: :btree
   add_index "restaurants", ["credit"], name: "index_restaurants_on_credit", using: :btree
   add_index "restaurants", ["delivery"], name: "index_restaurants_on_delivery", using: :btree
   add_index "restaurants", ["hours"], name: "index_restaurants_on_hours", using: :btree
@@ -83,7 +87,9 @@ ActiveRecord::Schema.define(version: 20170227145623) do
   add_index "restaurants", ["outdoor"], name: "index_restaurants_on_outdoor", using: :btree
   add_index "restaurants", ["parking"], name: "index_restaurants_on_parking", using: :btree
   add_index "restaurants", ["pick_up"], name: "index_restaurants_on_pick_up", using: :btree
+  add_index "restaurants", ["price"], name: "index_restaurants_on_price", using: :btree
   add_index "restaurants", ["reservations"], name: "index_restaurants_on_reservations", using: :btree
+  add_index "restaurants", ["state"], name: "index_restaurants_on_state", using: :btree
   add_index "restaurants", ["user_id"], name: "index_restaurants_on_user_id", using: :btree
   add_index "restaurants", ["zip"], name: "index_restaurants_on_zip", using: :btree
 

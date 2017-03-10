@@ -15,7 +15,7 @@ class ReviewIndex extends React.Component {
     }
     let reviews = [];
     for(let key in this.props.reviews){
-      reviews.push(this.props.reviews[key]);
+      reviews.unshift(this.props.reviews[key]);
     }
     const reviewItems = reviews.map((review, index) => {
       return(
