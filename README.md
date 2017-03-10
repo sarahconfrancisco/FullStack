@@ -5,10 +5,12 @@ Welp is a full-stack web application to search for, rate, and review restaurants
 ## How to Use
 
 ### Pages
-#### Login / Sign Up
-#### Search Page
-#### Restaurant Show
-#### Review Form
+#### ![Login](./screenshots/login.png)
+#### ![Sign Up](./screenshots/signup.png)
+#### ![Search](./screenshots/search.png)
+#### ![Restaurant Show](./screenshots/restaurant_show.png)
+#### ![Review Form](./screenshots/review_form.png)
+
 
 ### Download and Set Up
 
@@ -40,7 +42,7 @@ add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btre
 ```
 
 ### Models
-There are models for every table. Associations between models are established in ActiveRecord. Restaurants belong to users, reviews belong to a restaurant and a user, restaurant_types belong to a restaurant and a type. Most queries are done in ActiveRecord (finding the current user or all reviews for the current restaurant) but queries made by users are executed in pure SQL for speed.
+There are models for every table. Associations between models are established in ActiveRecord. Restaurants belong to users, reviews belong to a restaurant and a user, restaurant_types belong to a restaurant and a type. Most queries are done in ActiveRecord (finding the current user or all reviews for the current restaurant) but queries made by users are executed in pure SQL for speed. The user inputs strings for types and location so it is important to sanitize those inputs.
 
 ```Ruby
 class Review < ActiveRecord::Base
@@ -52,9 +54,9 @@ class Review < ActiveRecord::Base
 ```Ruby
 class Restaurant < ActiveRecord::Base
   def self.has_types_location_features(types, location, features)
-    types = types.map{ |ty| "'" + ty + "'"}.join(', ')
+    type_q_marks, type_names = sanitize_types(types)
     features = features.map { |feat| 'restaurants.' + feat + ' = true' }.join(" AND ")
-    search = Restaurant.find_by_sql([<<-SQL, location, location, location])
+    search = Restaurant.find_by_sql([<<-SQL, location, location, location, *type_names])
       SELECT
         restaurants.*
       FROM
@@ -69,7 +71,7 @@ class Restaurant < ActiveRecord::Base
           types.id = restaurant_types.type_id
       WHERE
         (restaurants.city LIKE ? OR restaurants.state LIKE ? OR restaurants.zip LIKE ?)
-        AND types.name IN (#{types}) AND #{features}
+        AND types.name IN (#{type_q_marks}) AND #{features}
 
     SQL
 
@@ -181,34 +183,6 @@ class ReviewForm extends React.Component {
 }
 ```
 
-Users can:
-  * Create an account
-  * Log in and out
-  * Search for restaurants by any combination of food types, location, features available
-  * See a google map populated with restaurants searched for
-  * See a restaurants details on a show page
-  * rate and review restaurants
-
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+##ToDos
+* [ ] Allow users to upload photos with their reviews
+* [ ] Create a splash homepage
