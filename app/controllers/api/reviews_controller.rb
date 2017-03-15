@@ -27,7 +27,7 @@ class Api::ReviewsController < ApplicationController
   end
 
   def index
-    @reviews = Review.where(restaurant_id: params[:res_id])
+    @reviews = Restaurant.find(params[:res_id]).reviews.includes(:user)
   end
 
   def destroy

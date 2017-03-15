@@ -25,185 +25,79 @@ class Restaurant < ActiveRecord::Base
 
   validates :name, :price, :address, :city, :state, :zip, :phone, :hours, :user, presence: true
 
+  def self.search
+    Restaurant.select("restaurants.*, COUNT( DISTINCT reviews.id) AS num_reviews, AVG(reviews.rating) AS avg_rating, array_agg(type_names.name) AS tys")
+    .from('restaurants').joins(:types).joins(:reviews).joins("LEFT OUTER JOIN
+              restaurant_types AS res_types
+            ON
+              res_types.restaurant_id = restaurants.id
+            LEFT OUTER JOIN
+              types AS type_names
+            ON
+              res_types.type_id = type_names.id")
+  end
+
   def self.has_types_location_features(types, location, features)
     type_q_marks, type_names = sanitize_types(types)
     features = features.map { |feat| 'restaurants.' + feat + ' = true' }.join(" AND ")
-    search = Restaurant.find_by_sql([<<-SQL, location, location, location, *type_names])
-      SELECT
-        restaurants.*
-      FROM
-        restaurants
-        LEFT JOIN
-          restaurant_types
-          ON
-          restaurant_types.restaurant_id = restaurants.id
-        LEFT JOIN
-          types
-          ON
-          types.id = restaurant_types.type_id
-      WHERE
-        (restaurants.city LIKE ? OR restaurants.state LIKE ? OR restaurants.zip LIKE ?)
-        AND types.name IN (#{type_q_marks}) AND #{features}
-
-    SQL
-
+    self.search.where("(restaurants.city LIKE ? OR restaurants.state LIKE ? OR restaurants.zip LIKE ?)
+      AND types.name IN (#{type_q_marks}) AND #{features}",location, location, location, type_names)
+      .group('restaurants.id', 'reviews.restaurant_id')
   end
 
   def self.has_types_location(types, location)
     type_q_marks, type_names = sanitize_types(types)
-    search = Restaurant.find_by_sql([<<-SQL, location, location, location, *type_names])
-      SELECT
-        restaurants.*
-      FROM
-        restaurants
-        LEFT JOIN
-          restaurant_types
-          ON
-          restaurant_types.restaurant_id = restaurants.id
-        LEFT JOIN
-          types
-          ON
-          types.id = restaurant_types.type_id
-      WHERE
-        (restaurants.city = ? OR restaurants.state = ? OR restaurants.zip = ?)
-        AND types.name IN (#{type_q_marks})
+    self.search.where("(restaurants.city = ? OR restaurants.state = ? OR restaurants.zip = ?)
+      AND types.name IN (#{type_q_marks})",location, location, location, type_names)
+      .group('restaurants.id', 'reviews.restaurant_id')
 
-    SQL
   end
 
   def self.has_types_features(types, features)
     type_q_marks, type_names = sanitize_types(types)
     features = features.map { |feat| 'restaurants.' + feat + ' = true' }.join(" AND ")
-    search = Restaurant.find_by_sql([<<-SQL, *type_names])
-      SELECT
-        restaurants.*
-      FROM
-        restaurants
-        LEFT JOIN
-          restaurant_types
-          ON
-          restaurant_types.restaurant_id = restaurants.id
-        LEFT JOIN
-          types
-          ON
-          types.id = restaurant_types.type_id
-      WHERE
-         types.name IN (#{type_q_marks}) AND #{features}
-
-    SQL
+    query = self.search.where("types.name IN (#{type_q_marks}) AND #{features}",type_names)
+      .group('restaurants.id', 'reviews.restaurant_id')
   end
 
   def self.has_types(types)
     type_q_marks, type_names = sanitize_types(types)
-    search = Restaurant.find_by_sql([<<-SQL, *type_names])
-      SELECT
-        restaurants.*
-      FROM
-          reviews
-        LEFT JOIN
-          restaurants
-        ON
-            reviews.restaurant_id = restaurants.id
-        LEFT JOIN
-          restaurant_types
-        ON
-          restaurant_types.restaurant_id = restaurants.id
-        LEFT JOIN
-          types
-        ON
-          types.id = restaurant_types.type_id
-      WHERE
-        types.name IN (#{type_q_marks})
-      GROUP BY
-        restaurants.id
-      ORDER BY
-        AVG(reviews.rating) DESC
-      LIMIT
-        10
+    self.search.where("types.name IN (#{type_q_marks})",type_names)
+      .group('restaurants.id', 'reviews.restaurant_id')
 
-    SQL
   end
 
   def self.has_features(features)
     features = features.map { |feat| 'restaurants.' + feat + ' = true' }.join(" AND ")
-    search = Restaurant.find_by_sql([<<-SQL])
-      SELECT
-        restaurants.*
-      FROM
-        restaurants
-        LEFT JOIN
-          reviews
-        ON
-          reviews.restaurant_id = restaurants.id
-      WHERE
-        #{features}
-      GROUP BY
-        restaurants.id
-      ORDER BY
-        AVG(reviews.rating) DESC
-      LIMIT
-        10
+    self.search.where("#{features}")
+      .group('restaurants.id', 'reviews.restaurant_id')
 
-    SQL
   end
 
   def self.has_features_location(features, location)
     features = features.map { |feat| 'restaurants.' + feat + ' = true' }.join(" AND ")
-    search = Restaurant.find_by_sql([<<-SQL, location, location, location])
-      SELECT
-        restaurants.*
-      FROM
-        restaurants
-      WHERE
-        (restaurants.city LIKE ? OR restaurants.state LIKE ? OR restaurants.zip LIKE ?) AND #{features}
+    self.search.where("(restaurants.city LIKE ? OR restaurants.state LIKE ? OR restaurants.zip LIKE ?) AND #{features}",location, location, location)
+      .group('restaurants.id', 'reviews.restaurant_id')
 
-
-    SQL
   end
 
 
   def self.has_location(location)
-    search = Restaurant.find_by_sql([<<-SQL, location, location, location])
-      SELECT
-        restaurants.*
-      FROM
-        restaurants
-        LEFT JOIN
-          reviews
-        ON
-          reviews.restaurant_id = restaurants.id
-      WHERE
-        (restaurants.city LIKE ? OR restaurants.state LIKE ? OR restaurants.zip LIKE ?)
-      GROUP BY
-        restaurants.id
-      ORDER BY
-        AVG(reviews.rating) DESC
-      LIMIT
-        10
-    SQL
+    self.search.where("(restaurants.city LIKE ? OR restaurants.state LIKE ? OR restaurants.zip LIKE ?)",location, location, location)
+      .group('restaurants.id', 'reviews.restaurant_id')
+
   end
 
   def self.highest_rated
-    Restaurant.find_by_sql([<<-SQL])
-      SELECT
-        restaurants.*
-      FROM
-        restaurants
-        LEFT JOIN
-          reviews
-        ON
-          reviews.restaurant_id = restaurants.id
-      GROUP BY
-        restaurants.id
-      ORDER BY
-        AVG(reviews.rating) DESC
-      LIMIT
-        10
-    SQL
+    self.search.group("restaurants.id").order('AVG(reviews.rating) DESC').limit(10)
+  end
+
+  def self.show_page(id)
+    self.search.where("restaurants.id = ?", id).group("restaurants.id")
   end
 
   def type_names
-    self.types.map {|type| type.name }
+    self.tys.uniq
   end
 
   def full_address
@@ -211,15 +105,9 @@ class Restaurant < ActiveRecord::Base
   end
 
   def rating
-    ratings = self.reviews.map { |rev| rev.rating }
-    return nil if ratings.count < 1
-    (( 0.0 + ratings.sum) / ratings.count).round
+    return nil if self.num_reviews < 1
+    self.avg_rating.round
   end
-
-  def num_reviews
-    self.reviews.count
-  end
-
 
   def self.sanitize_types(types)
     q_marks = []

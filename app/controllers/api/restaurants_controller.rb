@@ -22,7 +22,8 @@ class Api::RestaurantsController < ApplicationController
   end
 
   def show
-    @restaurant = Restaurant.find(params[:id])
+    @restaurant = Restaurant.select("restaurants.*, COUNT( DISTINCT reviews.id) AS num_reviews, AVG(reviews.rating) AS avg_rating, array_agg(types.name) AS tys")
+    .from('restaurants').joins(:types).joins(:reviews).where(id: params[:id]).group('restaurants.id').first
     @features = []
     @restaurant.attributes.keys.each do |atr|
       if @restaurant.attributes[atr] == true
@@ -47,13 +48,13 @@ class Api::RestaurantsController < ApplicationController
     types = params[:types].downcase.delete(" ").split(",")
     location = params[:zip]
     @restaurants = []
-    if features && types.length > 0 && location.length > 0
+    if features && types.length > 0 && location
       @restaurants = Restaurant.has_types_location_features(types, location, features)
-    elsif types.length > 0 && location.length > 0
+    elsif types.length > 0 && location
       @restaurants = Restaurant.has_types_location(types, location)
     elsif types.length > 0 && features
       @restaurants = Restaurant.has_types_features(types, features)
-    elsif features && location.length > 0
+    elsif features && location
       @restaurants = Restaurant.has_features_location(features, location)
     elsif types.length > 0
       @restaurants = Restaurant.has_types(types)
@@ -63,12 +64,12 @@ class Api::RestaurantsController < ApplicationController
       @restaurants = Restaurant.has_location(location)
     end
 
-    @restaurants = Restaurant.highest_rated if @restaurants.length < 1
+    @restaurants = Restaurant.highest_rated if !@restaurants || @restaurants.length < 1
     @types = params[:types]
     @location = params[:zip]
-    if(@restaurants.count > 0)
-      @lat = @restaurants.map {|res| res.latitude }.sum / @restaurants.count
-      @lng = @restaurants.map {|res| res.longitude }.sum / @restaurants.count
+    if(@restaurants.length > 0)
+      @lat = @restaurants.map {|res| res.latitude }.sum / @restaurants.length
+      @lng = @restaurants.map {|res| res.longitude }.sum / @restaurants.length
     end
     @features = params[:features]
   end
