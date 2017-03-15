@@ -41,7 +41,7 @@ class Restaurant < ActiveRecord::Base
     type_q_marks, type_names = sanitize_types(types)
     features = features.map { |feat| 'restaurants.' + feat + ' = true' }.join(" AND ")
     self.search.where("(restaurants.city LIKE ? OR restaurants.state LIKE ? OR restaurants.zip LIKE ?)
-      AND types.name IN (#{type_q_marks}) AND #{features}",location, location, location, type_names)
+      AND types.name IN (#{type_q_marks}) AND #{features}",location, location, location, *type_names)
       .group('restaurants.id', 'reviews.restaurant_id')
   end
 
@@ -56,7 +56,7 @@ class Restaurant < ActiveRecord::Base
   def self.has_types_features(types, features)
     type_q_marks, type_names = sanitize_types(types)
     features = features.map { |feat| 'restaurants.' + feat + ' = true' }.join(" AND ")
-    query = self.search.where("types.name IN (#{type_q_marks}) AND #{features}",type_names)
+    query = self.search.where("types.name IN (#{type_q_marks}) AND #{features}",*type_names)
       .group('restaurants.id', 'reviews.restaurant_id')
   end
 
