@@ -43,6 +43,7 @@ class Restaurant < ActiveRecord::Base
     self.search.where("(restaurants.city LIKE ? OR restaurants.state LIKE ? OR restaurants.zip LIKE ?)
       AND types.name IN (#{type_q_marks}) AND #{features}",location, location, location, *type_names)
       .group('restaurants.id', 'reviews.restaurant_id')
+      .order('AVG(reviews.rating) * COUNT( DISTINCT reviews.id) DESC').limit(15).to_a
   end
 
   def self.has_types_location(types, location)
@@ -50,6 +51,7 @@ class Restaurant < ActiveRecord::Base
     self.search.where("(restaurants.city = ? OR restaurants.state = ? OR restaurants.zip = ?)
       AND types.name IN (#{type_q_marks})",location, location, location, *type_names)
       .group('restaurants.id', 'reviews.restaurant_id')
+      .order('AVG(reviews.rating) * COUNT( DISTINCT reviews.id) DESC').limit(15).to_a
 
   end
 
@@ -58,12 +60,14 @@ class Restaurant < ActiveRecord::Base
     features = features.map { |feat| 'restaurants.' + feat + ' = true' }.join(" AND ")
     query = self.search.where("types.name IN (#{type_q_marks}) AND #{features}",*type_names)
       .group('restaurants.id', 'reviews.restaurant_id')
+      .order('AVG(reviews.rating) * COUNT( DISTINCT reviews.id) DESC').limit(15).to_a
   end
 
   def self.has_types(types)
     type_q_marks, type_names = sanitize_types(types)
     self.search.where("types.name IN (#{type_q_marks})",*type_names)
       .group('restaurants.id', 'reviews.restaurant_id')
+      .order('AVG(reviews.rating) * COUNT( DISTINCT reviews.id) DESC').limit(15).to_a
 
   end
 
@@ -71,6 +75,7 @@ class Restaurant < ActiveRecord::Base
     features = features.map { |feat| 'restaurants.' + feat + ' = true' }.join(" AND ")
     self.search.where("#{features}")
       .group('restaurants.id', 'reviews.restaurant_id')
+      .order('AVG(reviews.rating) * COUNT( DISTINCT reviews.id) DESC').limit(15).to_a
 
   end
 
@@ -78,13 +83,17 @@ class Restaurant < ActiveRecord::Base
     features = features.map { |feat| 'restaurants.' + feat + ' = true' }.join(" AND ")
     self.search.where("(restaurants.city LIKE ? OR restaurants.state LIKE ? OR restaurants.zip LIKE ?) AND #{features}",location, location, location)
       .group('restaurants.id', 'reviews.restaurant_id')
+      .order('AVG(reviews.rating) * COUNT( DISTINCT reviews.id) DESC').limit(15).to_a
 
   end
 
 
   def self.has_location(location)
-    self.search.where("(restaurants.city LIKE ? OR restaurants.state LIKE ? OR restaurants.zip LIKE ?)",location, location, location)
-      .group('restaurants.id', 'reviews.restaurant_id')
+    self.search
+    .where("(restaurants.city LIKE ? OR restaurants.state LIKE ? OR restaurants.zip LIKE ?)",location, location, location)
+    .group('restaurants.id', 'reviews.restaurant_id')
+    .order('AVG(reviews.rating) * COUNT( DISTINCT reviews.id) DESC').limit(15).to_a
+
 
   end
 

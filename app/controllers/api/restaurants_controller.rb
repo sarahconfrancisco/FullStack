@@ -49,22 +49,25 @@ class Api::RestaurantsController < ApplicationController
     location = params[:zip]
     @restaurants = []
     if features && types.length > 0 && location && location.length > 0
-      @restaurants = Restaurant.has_types_location_features(types, location, features).to_a
+      @restaurants = Restaurant.has_types_location_features(types, location, features)
     elsif types.length > 0 && location && location.length > 0
-      @restaurants = Restaurant.has_types_location(types, location).to_a
+      @restaurants = Restaurant.has_types_location(types, location)
     elsif types.length > 0 && features
-      @restaurants = Restaurant.has_types_features(types, features).to_a
+      @restaurants = Restaurant.has_types_features(types, features)
     elsif features && location && location.length > 0
-      @restaurants = Restaurant.has_features_location(features, location).to_a
+      @restaurants = Restaurant.has_features_location(features, location)
     elsif types.length > 0
-      @restaurants = Restaurant.has_types(types).to_a
+      @restaurants = Restaurant.has_types(types)
     elsif features
-      @restaurants = Restaurant.has_features(features).to_a
+      @restaurants = Restaurant.has_features(features)
     elsif location && location.length > 0
-      @restaurants = Restaurant.has_location(location).to_a
+      @restaurants = Restaurant.has_location(location)
     end
 
-    @restaurants = Restaurant.highest_rated if !@restaurants || @restaurants.length < 1
+
+    if !@restaurants || @restaurants.length < 1
+      @restaurants = Restaurant.highest_rated.to_a
+    end
     @types = params[:types]
     @location = params[:zip]
     if(@restaurants.length > 0)

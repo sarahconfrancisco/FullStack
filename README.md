@@ -5,6 +5,7 @@ Welp is a full-stack web application to search for, rate, and review restaurants
 ## How to Use
 
 ### Pages
+#### Login
 #### ![Login](./screenshots/login.png)
 #### ![Sign Up](./screenshots/signup.png)
 #### ![Search](./screenshots/search.png)
@@ -125,7 +126,6 @@ export const getReview = (user_id, restaurant_id, id = "id") => {
 ```
 
 ```javascript
-export const RECEIVE_REVIEWS = 'RECEIVE_REVIEWS';
 
 
 export const getReview = (user_id, restaurant_id) => dispatch => {
@@ -135,34 +135,6 @@ export const getReview = (user_id, restaurant_id) => dispatch => {
     (err) => dispatch(receiveErrors(err.responseJSON)));
 };
 
-export const receiveReviews = (reviews) => {
-  return({
-    type: RECEIVE_REVIEWS,
-    reviews
-  });
-};
-
-```
-
-```javascript
-const reviewReducer = (oldState = {}, action) => {
-  Object.freeze(oldState);
-  switch (action.type) {
-    case RECEIVE_REVIEWS:
-      return action.reviews;
-    default:
-      return oldState;
-  }
-};
-
-const RootReducer = combineReducers({
-  currentUser: SessionReducer,
-  errors: ErrorReducer,
-  restaurant: RestaurantReducer,
-  reviewIndex: ReviewReducer,
-  search: SearchReducer,
-  loading: LoadingReducer
-});
 ```
 
 ### Components
@@ -186,3 +158,4 @@ class ReviewForm extends React.Component {
 ##ToDos
 * [ ] Allow users to upload photos with their reviews
 * [ ] Create a splash homepage
+* [ ] Allow users to add new restaurants
