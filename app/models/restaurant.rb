@@ -48,7 +48,7 @@ class Restaurant < ActiveRecord::Base
   def self.has_types_location(types, location)
     type_q_marks, type_names = sanitize_types(types)
     self.search.where("(restaurants.city = ? OR restaurants.state = ? OR restaurants.zip = ?)
-      AND types.name IN (#{type_q_marks})",location, location, location, type_names)
+      AND types.name IN (#{type_q_marks})",location, location, location, *type_names)
       .group('restaurants.id', 'reviews.restaurant_id')
 
   end
@@ -62,7 +62,7 @@ class Restaurant < ActiveRecord::Base
 
   def self.has_types(types)
     type_q_marks, type_names = sanitize_types(types)
-    self.search.where("types.name IN (#{type_q_marks})",type_names)
+    self.search.where("types.name IN (#{type_q_marks})",*type_names)
       .group('restaurants.id', 'reviews.restaurant_id')
 
   end
