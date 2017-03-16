@@ -4,22 +4,31 @@ Welp is a full-stack web application to search for, rate, and review restaurants
 
 ## How to Use
 
+### Download and Set Up
+- Download the repo
+- <tt>bundle install</tt>
+- <tt>npm install</tt>
+- <tt>bundle exec rake db:setup</tt>
+- <tt>bundle exec rails server</tt>
+- Go to your local host!
+
 ### Pages
 #### Login
 #### ![Login](./screenshots/login.png)
+#### Sign Up
 #### ![Sign Up](./screenshots/signup.png)
+#### Search
 #### ![Search](./screenshots/search.png)
+#### Restaurant Show
 #### ![Restaurant Show](./screenshots/restaurant_show.png)
+#### Review Form
 #### ![Review Form](./screenshots/review_form.png)
 
 
-### Download and Set Up
 
 ## Google Maps and Geocoder
+When the user searches for restaurants they want to know where those restaurants are. I used the Google Maps Api to render the location of restaurants but to do this you need to know their longitude and latitude. Most users who want to add a restaurant don't know their business' latitude and longitude. Conversely users who want to go to a restaurant need an address not coordinates. I used a ruby gem, Geocoder, to take a restaurant's address and get its coordinates. When seeding my database it wasn't feasible to find 50+ valid NYC addresses around NYC so I used Geocoder to find real addresses for seed restaurants based on latitude and longitude. I picked a maximum and minimum longitude and latitude for NYC and gave each restaurant random coordinates in those ranges.
 
-### Finding Restaurant Latitude and Longitude
-### Restaurants Searched For
-### Static Images
 
 ## High View Application Walkthrough
 
