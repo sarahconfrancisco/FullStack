@@ -14,7 +14,7 @@ class Api::ReviewsController < ApplicationController
   def update
     @review = Review.find(params[:id])
     if @review.update!(review_params)
-      @restaurant = @review.restaurant
+      @restaurant = Restaurant.show_page(@review.restaurant.id).first
       render 'api/restaurants/show'
     else
       render json: @review.errors.full_messages, status: 422
@@ -27,7 +27,7 @@ class Api::ReviewsController < ApplicationController
   end
 
   def index
-    @reviews = Restaurant.find(params[:res_id]).reviews.includes(:user)
+    @reviews = Restaurant.show_page(params[:res_id]).first.reviews.includes(:user)
   end
 
   def destroy
