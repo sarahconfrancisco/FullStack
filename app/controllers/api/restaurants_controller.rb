@@ -22,8 +22,7 @@ class Api::RestaurantsController < ApplicationController
   end
 
   def show
-    @restaurant = Restaurant.select("restaurants.*, COUNT( DISTINCT reviews.id) AS num_reviews, AVG(reviews.rating) AS avg_rating, array_agg(types.name) AS tys")
-    .from('restaurants').joins(:types).joins(:reviews).where(id: params[:id]).group('restaurants.id').first
+    @restaurant = Restaurant.show_page(params[:id]).first
     @features = []
     @restaurant.attributes.keys.each do |atr|
       if @restaurant.attributes[atr] == true
