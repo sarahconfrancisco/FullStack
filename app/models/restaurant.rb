@@ -40,9 +40,9 @@ class Restaurant < ActiveRecord::Base
   end
 
   def self.has_features(features, relation)
-    features = features.map! { |feat| 'restaurants.' + feat + ' = true' }
+    features = features.map { |feat| 'restaurants.' + feat }
                        .join(' AND ').to_s
-    relation.where(features)
+    relation.where("#{features}")
   end
 
   def self.has_location(location, relation)
