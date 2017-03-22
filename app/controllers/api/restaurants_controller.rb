@@ -39,50 +39,45 @@ class Api::RestaurantsController < ApplicationController
     @hours = JSON.parse(@restaurant.hours)
   end
 
-  def update
-  end
+  def update; end
 
   def index
     features = params[:features]
-    types = params[:types].downcase.delete(" ").split(",")
+    types = params[:types].downcase.delete(' ').split(',')
     location = params[:zip]
-    @restaurants = []
-    if features && types.length > 0 && location && location.length > 0
-      @restaurants = Restaurant.has_types_location_features(types, location, features)
-    elsif types.length > 0 && location && location.length > 0
-      @restaurants = Restaurant.has_types_location(types, location)
-    elsif types.length > 0 && features
-      @restaurants = Restaurant.has_types_features(types, features)
-    elsif features && location && location.length > 0
-      @restaurants = Restaurant.has_features_location(features, location)
-    elsif types.length > 0
-      @restaurants = Restaurant.has_types(types)
-    elsif features
-      @restaurants = Restaurant.has_features(features)
-    elsif location && location.length > 0
-      @restaurants = Restaurant.has_location(location)
-    end
 
+    if (!features || features.empty?) && (!types || types.empty?) && (!location || location.empty?)
+      @restaurants = Restaurant.highest_rated
+    else
+      relation = Restaurant.search
 
-    if !@restaurants || @restaurants.length < 1
-      @restaurants = Restaurant.highest_rated.to_a
+      if features && !features.empty?
+        relation = Restaurant.has_features(features, relation)
+      end
+
+      if types && !types.empty?
+        res_ids = RestaurantType.get_res_ids_from_types(types)
+        relation = Restaurant.has_types(res_ids, relation)
+      end
+
+      if location && !location.empty?
+        relation = Restaurant.has_location(location, relation)
+      end
+      @restaurants = Restaurant.end_query(relation)
     end
+    @restaurants = Restaurant.highest_rated if @restaurants.empty?
     @types = params[:types]
     @location = params[:zip]
-    if(@restaurants.length > 0)
-      @lat = @restaurants.map {|res| res.latitude }.sum / @restaurants.length
-      @lng = @restaurants.map {|res| res.longitude }.sum / @restaurants.length
-    end
+    @lat = @restaurants.map(&:latitude).inject(:+) / @restaurants.length
+    @lng = @restaurants.map(&:longitude).inject(:+) / @restaurants.length
     @features = params[:features]
   end
 
-  def destroy
-  end
+  def destroy; end
 
   private
 
   def restaurant_params
     params.require(:restaurant).permit!
   end
-
 end
