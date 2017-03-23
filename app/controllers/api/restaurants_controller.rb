@@ -52,11 +52,11 @@ class Api::RestaurantsController < ApplicationController
 
   private
 
-  def types?(types)
+  def type?(types)
     types && !types.empty?
   end
 
-  def features?(features)
+  def feature?(features)
     features && !features.empty?
   end
 
@@ -64,14 +64,14 @@ class Api::RestaurantsController < ApplicationController
     location && !location.empty?
   end
 
-  def query_against(types, features, location)
-    return nil unless types?(types) || features?(features) || location?(location)
+  def query_against(type, feature, location)
+    return nil unless type?(type) || feature?(feature) || location?(location)
     relation = Restaurant.search
-    if types?(types)
-      res_ids = RestaurantType.get_res_ids_from_types(types)
+    if type?(type)
+      res_ids = RestaurantType.get_res_ids_from_types(type)
       relation = Restaurant.with_types(res_ids, relation)
     end
-    relation = Restaurant.with_features(features, relation) if features?(features)
+    relation = Restaurant.with_features(feature, relation) if feature?(feature)
     Restaurant.with_location(location, relation) if location?(location)
   end
 
