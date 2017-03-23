@@ -22,7 +22,7 @@ class Api::ReviewsController < ApplicationController
   end
 
   def show
-    @review = Review.find_by(id: params[:id]) || Review.find_by({user_id: params[:user_id], restaurant_id: params[:restaurant_id]}) || Review.new()
+    @review = Review.find_by({user_id: params[:user_id], restaurant_id: params[:restaurant_id]}) || Review.new()
     @user = @review.user || {id: nil, fname: "", lname: "", zip: ""}
   end
 
