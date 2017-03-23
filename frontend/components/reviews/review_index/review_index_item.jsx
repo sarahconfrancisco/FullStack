@@ -1,9 +1,11 @@
 import React from 'react';
+import Star from '../../star';
 
 const ReviewIndexItem = (props) => {
   if(!props.review || !props.review.user){
     return(<div></div>);
   }
+  const stars = [1,2,3,4,5].map((idx) => <Star rating={props.review.rating} index={idx} key={idx} name="smallest-star" />)
   return(
     <div className="review-index-item">
       <div className="left-review-item">
@@ -12,35 +14,7 @@ const ReviewIndexItem = (props) => {
       </div>
       <div className="right-review-item">
         <ul className="res-stars">
-          <li>
-            <button value={1} className={ ((props.review.rating >= 1 ) ? "highlight " : "" ) + "smallest-star"} >
-              <img src={window.images.star_icon} className="star-icon" />
-            </button>
-          </li>
-
-          <li>
-            <button value={2} className={ ((props.review.rating >= 2 ) ? "highlight " : "" ) + "smallest-star"} >
-              <img src={window.images.star_icon} className="star-icon" />
-            </button>
-          </li>
-
-          <li>
-            <button value={3} className={ ((props.review.rating >= 3 ) ? "highlight " : "" ) + "smallest-star"} >
-              <img src={window.images.star_icon} className="star-icon" />
-            </button>
-          </li>
-
-          <li>
-            <button value={4} className={ ((props.review.rating >= 4 ) ? "highlight " : "" ) + "smallest-star"} >
-              <img src={window.images.star_icon} className="star-icon" />
-            </button>
-          </li>
-
-          <li>
-            <button value={5} className={ ((props.review.rating >= 5 ) ? "highlight " : "" ) + "smallest-star"} >
-              <img src={window.images.star_icon} className="star-icon" />
-            </button>
-          </li>
+          {stars}
           <li><span>{props.review.date}</span></li>
         </ul>
         <p>{props.review.body}</p>

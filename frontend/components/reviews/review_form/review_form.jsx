@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router';
 import RestaurantIndexItem from '../../search/restaurant_index_item';
+import Star from '../../star';
 
 class ReviewForm extends React.Component {
 
@@ -69,6 +70,14 @@ class ReviewForm extends React.Component {
     if(!this.state.date){
       return(<div></div>);
     }
+
+    const stars = [1,2,3,4,5].map((idx) => (
+      <li className="small-square-button" key={idx} onClick={this.updateRating(idx).bind(this)}>
+        <ul>
+          <Star rating={this.state.rating} index={idx} name="small-square-button" />
+        </ul>
+      </li>));
+
     return(
       <div className="review-form">
         <h3>Write a Review</h3>
@@ -77,37 +86,8 @@ class ReviewForm extends React.Component {
       <div className="review-input">
         <div className='review-rating'>
 
-        <ul >
-          <li>
-            <button value={1} className={ ((this.state.rating >= 1 ) ? "highlight " : "" ) + "small-square-button"} onClick={this.updateRating(1).bind(this)}>
-              <img src={window.images.star_icon} className="star-icon" />
-            </button>
-          </li>
-
-          <li>
-            <button value={2} className={ ((this.state.rating >= 2 ) ? "highlight " : "" ) + "small-square-button"} onClick={this.updateRating(2).bind(this)}>
-              <img src={window.images.star_icon} className="star-icon" />
-            </button>
-          </li>
-
-          <li>
-            <button value={3} className={ ((this.state.rating >= 3 ) ? "highlight " : "" ) + "small-square-button"} onClick={this.updateRating(3).bind(this)}>
-              <img src={window.images.star_icon} className="star-icon" />
-            </button>
-          </li>
-
-          <li>
-            <button value={4} className={ ((this.state.rating >= 4 ) ? "highlight " : "" ) + "small-square-button"} onClick={this.updateRating(4).bind(this)}>
-              <img src={window.images.star_icon} className="star-icon" />
-            </button>
-          </li>
-
-          <li>
-            <button value={5} className={ ((this.state.rating >= 5 ) ? "highlight " : "" ) + "small-square-button"} onClick={this.updateRating(5).bind(this)}>
-              <img src={window.images.star_icon} className="star-icon" />
-            </button>
-          </li>
-
+        <ul className="review-form-stars">
+          {stars}
         </ul>
         <span>Select your rating</span>
       </div>
