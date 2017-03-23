@@ -1,4 +1,5 @@
-json.extract! restaurant, :id, :name, :address, :city, :state, :zip, :phone, :website, :price, :rating, :num_reviews, :latitude, :longitude
+json.extract! restaurant, :id, :name, :rating, :city, :state, :zip, :phone,
+              :price, :website, :address, :num_reviews, :latitude, :longitude
 json.types do
   json.array! restaurant.type_names
 end

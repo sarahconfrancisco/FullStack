@@ -8,7 +8,8 @@ FEATURES =
     'credit' => 'Accepts Credit Cards',
     'bar' => 'Serves Alcohol',
     'byob' => 'BYOB'
-  }
+  }.freeze
+
 class Api::RestaurantsController < ApplicationController
   def create
     @restaurant = Restaurant.new(restaurant_params)
@@ -26,7 +27,7 @@ class Api::RestaurantsController < ApplicationController
   end
 
   def show
-    @restaurant = Restaurant.show_page(params[:id]).first
+    @restaurant = Restaurant.show_page(params[:id])
     @features = []
     @restaurant.attributes.keys.each do |atr|
       @features.push(FEATURES[atr])  if @restaurant.attributes[atr] == true
@@ -40,24 +41,7 @@ class Api::RestaurantsController < ApplicationController
     @features = params[:features]
     @types = params[:types]
     @location = params[:zip]
-    relation = nil
-
-    if types?(@types)
-      relation = Restaurant.search
-      types = @types.downcase.delete(' ').split(',')
-      res_ids = RestaurantType.get_res_ids_from_types(types)
-      relation = Restaurant.has_types(res_ids, relation)
-    end
-
-    if features?(@features)
-      relation ||= Restaurant.search
-      relation = Restaurant.has_features(@features, relation)
-    end
-
-    if location?(@location)
-      relation ||= Restaurant.search
-      relation = Restaurant.has_location(@location, relation)
-    end
+    relation = query_against(@types, @features, @location)
     @restaurants = Restaurant.end_query(relation) if relation
     @restaurants = Restaurant.highest_rated if !relation || @restaurants.empty?
     @lat = @restaurants.map(&:latitude).inject(:+) / @restaurants.length
@@ -78,6 +62,17 @@ class Api::RestaurantsController < ApplicationController
 
   def location?(location)
     location && !location.empty?
+  end
+
+  def query_against(types, features, location)
+    return nil unless types?(types) || features?(features) || location?(location)
+    relation = Restaurant.search
+    if types?(types)
+      res_ids = RestaurantType.get_res_ids_from_types(types)
+      relation = Restaurant.with_types(res_ids, relation)
+    end
+    relation = Restaurant.with_features(features, relation) if features?(features)
+    Restaurant.with_location(location, relation) if location?(location)
   end
 
   def restaurant_params
