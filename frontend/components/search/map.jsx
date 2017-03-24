@@ -7,7 +7,7 @@ class RestaurantMap extends React.Component {
     super(props);
   }
 
-  componentDidMount(){
+  componentWillUpdate(nextProps){
     this.map = new google.maps.Map(this.mapNode, {
       center: {"lat": 40.7127837,
               "lng": -74.0059413},
@@ -15,15 +15,6 @@ class RestaurantMap extends React.Component {
     });
     this.geocoder = new google.maps.Geocoder();
     this.MarkerManager = new MarkerManager(this.map);
-    this.codeAddress(this.props.zip,
-                     this.map,
-                     this.MarkerManager,
-                     this.geocoder,
-                     this.props.restaurants,
-                     this.props.latlng);
-  }
-
-  componentWillUpdate(nextProps){
     this.codeAddress(nextProps.zip,
                      this.map,
                      this.MarkerManager,

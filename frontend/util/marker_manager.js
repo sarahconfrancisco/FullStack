@@ -5,7 +5,7 @@ class MarkerManager {
   }
 
   _markerExists(restaurant){
-    this.markers.forEach((restaurant) => {
+    this.markers.forEach((marker) => {
       if(marker.position.lat() === restaurant.latitude && marker.position.lng() === restaurant.longitude){
         return true;
       }
@@ -15,7 +15,7 @@ class MarkerManager {
 
   _restaurantInState(marker){
     for(var id in this.restaurants ){
-      if(marker.position.lat === this.restaurants[id].latitude && marker.position.lng === this.restaurants[id].longitude){
+      if(marker.position.lat() === this.restaurants[id].latitude && marker.position.lng() === this.restaurants[id].longitude){
         return true;
       }
     }
