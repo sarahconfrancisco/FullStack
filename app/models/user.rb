@@ -25,10 +25,11 @@ class User < ActiveRecord::Base
   end
 
   after_initialize :ensure_token
-  validates :session_token, :password_digest, :fname, :lname, :email, :zip, presence: true
+  validates :session_token, :password_digest,
+            :fname, :lname, :email, :zip, presence: true
   validates :session_token, :email, uniqueness: true
-  validates :password, length: {minimum: 6, allow_nil: true}
-  validates :zip, length: {minimum: 5, maximum: 5}
+  validates :password, length: { minimum: 6, allow_nil: true }
+  validates :zip, length: { minimum: 5, maximum: 5 }
 
 
   def self.find_by_credentials(email, password)
@@ -42,7 +43,7 @@ class User < ActiveRecord::Base
   end
 
   def is_password?(password)
-    BCrypt::Password.new(self.password_digest).is_password?(password)
+    BCrypt::Password.new(password_digest).is_password?(password)
   end
 
   def generate_token
@@ -50,12 +51,13 @@ class User < ActiveRecord::Base
   end
 
   def reset_token!
-    self.session_token = generate_token
-    self.save
-    self.session_token
+    session_token = generate_token
+    save
+    session_token
   end
 
   private
+
   def ensure_token
     self.session_token ||= generate_token
   end

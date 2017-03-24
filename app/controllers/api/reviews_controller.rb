@@ -1,6 +1,4 @@
-#''
 class Api::ReviewsController < ApplicationController
-  def new; end
   def create
     @review = Review.new(review_params)
     @review.user_id ||= current_user.id
@@ -24,7 +22,9 @@ class Api::ReviewsController < ApplicationController
   end
 
   def show
-    @review = Review.find_by(user_id: params[:user_id], restaurant_id: params[:restaurant_id]) || Review.new()
+    @review = Review.find_by(user_id: params[:user_id],
+                             restaurant_id: params[:restaurant_id])
+    @review = Review.new unless @review
     @user = @review.user || { id: nil, fname: '', lname: '', zip: '' }
   end
 

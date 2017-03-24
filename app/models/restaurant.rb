@@ -58,7 +58,8 @@ class Restaurant < ActiveRecord::Base
   # :if => lambda{ |obj| obj.address_changed? ||
   # obj.city_changed? || obj.zip_changed? }
   validates_uniqueness_of :name, scope: [:latitude, :longitude]
-  validates :name, :price, :address, :city, :state, :zip, :phone, :hours, :user, presence: true
+  validates :name, :price, :address, :city, :state, :zip,
+            :phone, :hours, :user, presence: true
 
   def self.search
     Restaurant.select('restaurants.*,
