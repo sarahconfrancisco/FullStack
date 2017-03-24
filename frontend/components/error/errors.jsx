@@ -16,7 +16,9 @@ class Error extends React.Component{
     return (<div></div>);
   }
 
-  const errors = Object.keys(this.props.errors).map((key) => (<li key={key}>{this.props.errors[key]}</li>));
+  const errors = Object.keys(this.props.errors).map((key) => {
+    return (<li key={key}>{this.props.errors[key]}</li>);
+  });
   return(
     <div className="error">
       <ul>

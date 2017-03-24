@@ -14,11 +14,15 @@ class ResHeader extends React.Component {
   }
   typeArray = typeArray.join(", ").split(" ");
 
-  const types = (typeArray.map((type) => <a key={type}>{type} </a>));
-  const stars = [1,2,3,4,5].map((idx) => <Star rating={this.props.rating} index={idx} key={idx} name="smaller-star" />)
+  const types = typeArray.map((type) => <a key={type}>{type} </a>);
+  const stars = [1,2,3,4,5].map((idx) => <Star rating={this.props.rating}
+                                               index={idx} key={idx}
+                                               name="smaller-star"
+                                         />)
   const price = "$".repeat(this.props.price);
   return(
     <div className='res-show-header'>
+
       <div className='res-header-left'>
         <h1>{this.props.name}</h1>
         <div className="res-rating">
@@ -34,7 +38,9 @@ class ResHeader extends React.Component {
 
 
       <div className='res-header-right'>
-        <button onClick={() => this.props.router.push(`/newreview/${this.props.id}`)} className="medium-button">
+        <button
+            onClick={() => this.props.router.push(`/newreview/${this.props.id}`)}
+            className="medium-button">
           <Link>
           <img src={window.images.star_icon} className="star-icon" />
             <span>
@@ -51,8 +57,8 @@ class ResHeader extends React.Component {
             </span>
           </Link>
         </button>
-
       </div>
+
     </div>
   );
 }

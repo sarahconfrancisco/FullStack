@@ -95,12 +95,22 @@ class SessionForm extends React.Component{
     let forgotPassword;
     if (this.props.formType === "Sign Up"){
       bottomLink = (
-        <span className="bottom-link">Already on Welp? <Link to="/login">Log In</Link></span>
+        <span className="bottom-link">
+          Already on Welp? <Link to="/login">Log In</Link>
+        </span>
       )
       name = (
         <div className="half-input">
-          <input type="text" placeholder="First Name" value={this.state.fname} onChange={this.update('fname').bind(this)} />
-          <input type="text" value={this.state.lname} placeholder="Last Name" onChange={this.update('lname').bind(this)} />
+          <input type="text"
+                 placeholder="First Name"
+                 value={this.state.fname}
+                 onChange={this.update('fname').bind(this)}
+          />
+          <input type="text"
+                 value={this.state.lname}
+                 placeholder="Last Name"
+                 onChange={this.update('lname').bind(this)}
+          />
         </div>
       )
       title = (
@@ -130,25 +140,36 @@ class SessionForm extends React.Component{
       )
 
       terms = (
-        <span className="terms"> By signing up, you agree to Welp's <a>Terms of Service</a> and <a>Privacy Policy</a>.</span>
+        <span className="terms">
+          By signing up, you agree to Welp's
+          <a> Terms of Service </a>and
+          <a> Privacy Policy</a>.
+        </span>
 
       )
     } else {
       forgotPassword = (
-        <span className="terms bottom-link"><a>Forgot Password?</a></span>
-
+        <span className="terms bottom-link">
+          <a>Forgot Password?</a>
+        </span>
       )
       terms = (
-        <span className="terms"> By logging in, you agree to Welp's <a>Terms of Service</a> and <a>Privacy Policy</a>.</span>
+        <span className="terms">
+          By logging in, you agree to Welp's
+          <a> Terms of Service </a>
+           and <a> Privacy Policy</a>.
+        </span>
 
       )
       bottomLink = (
-        <span className="bottom-link">New to Welp? <Link to="/signup">Sign Up</Link></span>
+        <span className="bottom-link">
+          New to Welp? <Link to="/signup">Sign Up</Link>
+        </span>
       )
       title = (
         <div className="title">
           <h4>Log In to Welp</h4>
-          <h6>New to Welp? <Link to="/signup"> Sign up</Link></h6>
+          <h6>New to Welp? <Link to="/signup">Sign up</Link></h6>
         </div>
       )
     }
@@ -158,11 +179,19 @@ class SessionForm extends React.Component{
           {title}
           <br />
           <div className="name-password">
-
             {name}
-            <input className="full-input" type="text" placeholder="Email" value={this.state.email} onChange={this.update('email').bind(this)}/>
+            <input className="full-input"
+                   type="text" placeholder="Email"
+                   value={this.state.email}
+                   onChange={this.update('email').bind(this)}
+            />
             <br />
-            <input className="full-input" type="password" placeholder="Password (minimum 6 characters)" onChange={this.update('password').bind(this)} value={this.state.password} />
+            <input className="full-input"
+                   type="password"
+                   placeholder="Password (minimum 6 characters)"
+                   onChange={this.update('password').bind(this)}
+                   value={this.state.password}
+            />
             {forgotPassword}
           </div>
           <br />

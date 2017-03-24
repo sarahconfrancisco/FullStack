@@ -6,7 +6,7 @@ class Api::ReviewsController < ApplicationController
     @review.user_id ||= current_user.id
     @review.restaurant_id ||= params[:id]
     if @review.save!
-      @restaurant = Restaurant.show_page(@review.restaurant.id).first
+      @restaurant = Restaurant.show_page(@review.restaurant.id)
       render 'api/restaurants/show'
     else
       render json: @review.errors.full_messages, status: 422
@@ -16,7 +16,7 @@ class Api::ReviewsController < ApplicationController
   def update
     @review = Review.find(params[:id])
     if @review.update!(review_params)
-      @restaurant = Restaurant.show_page(@review.restaurant.id).first
+      @restaurant = Restaurant.show_page(@review.restaurant.id)
       render 'api/restaurants/show'
     else
       render json: @review.errors.full_messages, status: 422

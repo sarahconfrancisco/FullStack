@@ -1,68 +1,56 @@
 import React from 'react';
 import { Link } from 'react-router';
+import Star from '../star';
 
-const makeTinyStars = (rating) => {
-  return(
-    <ul className="index-stars">
-      <li>
-        <button value={1} className={ ((rating >= 1 ) ? "highlight " : "" ) + "smallest-star"} >
-          <img src={window.images.star_icon} className="star-icon-smaller" />
-        </button>
-      </li>
+const RestaurantIndexItem = ({ restaurant }) => {
+  const stars = [1,2,3,4,5].map((idx) => <Star
+                                        rating={restaurant.rating}
+                                        key={idx} index={idx}
+                                        name='smallest-star' />)
+  const price = "$".repeat(parseInt(restaurant.price));
+  const typeArray = restaurant.types.join(", ").split(" ");
+  const types = typeArray.map((type) => <a key={type}>{type} </a>);
 
-      <li>
-        <button value={2} className={ ((rating >= 2 ) ? "highlight " : "" ) + "smallest-star"} >
-          <img src={window.images.star_icon} className="star-icon-smaller" />
-        </button>
-      </li>
-
-      <li>
-        <button value={3} className={ ((rating >= 3 ) ? "highlight " : "" ) + "smallest-star"} >
-          <img src={window.images.star_icon} className="star-icon-smaller" />
-        </button>
-      </li>
-
-      <li>
-        <button value={4} className={ ((rating >= 4 ) ? "highlight " : "" ) + "smallest-star"} >
-          <img src={window.images.star_icon} className="star-icon-smaller" />
-        </button>
-      </li>
-
-      <li>
-        <button value={5} className={ ((rating >= 5 ) ? "highlight " : "" ) + "smallest-star"} >
-          <img src={window.images.star_icon} className="star-icon" />
-        </button>
-      </li>
-
-    </ul>
-  );
-}
-
-
-const RestaurantIndexItem = (props) => {
-  const tinyStars = makeTinyStars(props.restaurant.rating);
-  const price = "$".repeat(parseInt(props.restaurant.price));
-  const typeArray = props.restaurant.types.join(", ").split(" ");
-
-  const types = (typeArray.map((type) => <a key={type}>{type} </a>));
   return(
     <div className="restaurant-index-item">
-      <div className="avatar-container"><img src={props.restaurant.image_1_url}/></div>
-      <div className="left-index-item">
 
-        <Link to={`/restaurant/${props.restaurant.id}`}>{props.restaurant.name}</Link>
+      <div className="avatar-container">
+        <img src={restaurant.image_1_url}/>
+      </div>
+
+      <div className="left-index-item">
+        <Link to={`/restaurant/${restaurant.id}`}>
+          {restaurant.name}
+        </Link>
         <div className="res-rating">
-          {tinyStars}
-          <span>{props.restaurant.num_reviews} reviews</span>
+          <ul className="index-stars">
+            {stars}
+          </ul>
+          <span>
+            {restaurant.num_reviews} reviews
+          </span>
         </div>
         <div className="type-price">
-          <span>{price} <p className="bullet">•</p> {types}</span>
+          <span>
+            {price}
+            <p className="bullet">•</p>
+            {types}
+          </span>
         </div>
       </div>
+
       <div className="right-index-item">
-        <span>{props.restaurant.address}</span>
-        <span>{props.restaurant.city}, {props.restaurant.state} {props.restaurant.zip}</span>
-        <span>{props.restaurant.phone}</span>
+        <span>
+          {restaurant.address}
+        </span>
+        <span>
+          {restaurant.city},
+          {restaurant.state}
+          {restaurant.zip}
+        </span>
+        <span>
+          {restaurant.phone}
+        </span>
       </div>
     </div>
   );

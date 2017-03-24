@@ -58,13 +58,6 @@ class ReviewForm extends React.Component {
       this.setState({rating: parseInt(rating)});
     });
   }
-  hightlight(value){
-    if(value >= parseInt(this.state.rating)){
-      return "hightlight ";
-    } else {
-      return "";
-    }
-  }
 
   render(){
     if(!this.state.date){
@@ -72,9 +65,14 @@ class ReviewForm extends React.Component {
     }
 
     const stars = [1,2,3,4,5].map((idx) => (
-      <li className="small-square-button" key={idx} onClick={this.updateRating(idx).bind(this)}>
+      <li className="small-square-button"
+          key={idx}
+          onClick={this.updateRating(idx).bind(this)}>
         <ul>
-          <Star rating={this.state.rating} index={idx} name="small-square-button" />
+          <Star rating={this.state.rating}
+                index={idx}
+                name="small-square-button"
+          />
         </ul>
       </li>));
 
@@ -83,18 +81,27 @@ class ReviewForm extends React.Component {
         <h3>Write a Review</h3>
         <RestaurantIndexItem restaurant={this.props.restaurant} />
         <label>Your Review</label>
-      <div className="review-input">
-        <div className='review-rating'>
-
-        <ul className="review-form-stars">
-          {stars}
-        </ul>
-        <span>Select your rating</span>
+        <div className="review-input">
+          <div className='review-rating'>
+          <ul className="review-form-stars">
+            {stars}
+          </ul>
+          <span>Select your rating</span>
+        </div>
+        <textarea placeholder=
+                  "Your review helps others learn about great local
+                   restaurants. Please don't review this restaurant
+                   if you received a freebie for writing this review,
+                   or if you're connected in any way to the owner or
+                   employees."
+                  value={this.state.body || ""}
+                  onChange={this.update('body').bind(this)}
+        />
       </div>
-        <textarea placeholder="Your review helps others learn about great local restaurants.
-          Please don't review this restaurant if you received a freebie for writing this review, or if you're connected in any way to the owner or employees." value={this.state.body || ""} onChange={this.update('body').bind(this)} />
-      </div>
-      <button className="post-review-button" onClick={this.handleSubmit().bind(this)}><span>Post Review</span></button>
+      <button className="post-review-button"
+              onClick={this.handleSubmit().bind(this)}>
+              <span>Post Review</span>
+      </button>
     </div>
     );
   }

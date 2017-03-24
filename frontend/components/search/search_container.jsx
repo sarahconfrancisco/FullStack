@@ -2,19 +2,19 @@ import { connect } from 'react-redux';
 import { fetchSearchRestaurants } from '../../actions/search_actions';
 import SearchPage from './search';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ currentUser, search, loading }) => {
   let userZip;
-  if(state.currentUser.zip){
-    userZip = state.currentUser.zip;
+  if(currentUser.zip){
+    userZip = currentUser.zip;
   } else {
     userZip = "10001";
   }
   return{
-  results: state.search.results,
-  params: state.search.params,
+  results: search.results,
+  params: search.params,
   userZip: userZip,
-  latlng: state.search.latlng,
-  loading: state.loading.searchLoading
+  latlng: search.latlng,
+  loading: loading.searchLoading
 
 }};
 

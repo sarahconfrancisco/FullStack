@@ -72,7 +72,8 @@ class Api::RestaurantsController < ApplicationController
       relation = Restaurant.with_types(res_ids, relation)
     end
     relation = Restaurant.with_features(feature, relation) if feature?(feature)
-    Restaurant.with_location(location, relation) if location?(location)
+    relation = Restaurant.with_location(location, relation) if location?(location)
+    relation
   end
 
   def restaurant_params

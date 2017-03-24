@@ -1,9 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-
-
-
 class Header extends React.Component {
 
   constructor(props){
@@ -16,7 +13,6 @@ class Header extends React.Component {
   sessionLinks(){
     return (
     <nav className="login-signup">
-
       <Link to="/signup" activeClassName="current">
         <button>Sign Up</button>
       </Link>
@@ -25,7 +21,9 @@ class Header extends React.Component {
         <button>Log In</button>
       </Link>
       <br />
-      <button onClick={this.guestSignin()}>Login as Guest</button>
+      <button onClick={this.guestSignin()}>
+        Login as Guest
+      </button>
     </nav>
     );
 }
@@ -44,14 +42,14 @@ class Header extends React.Component {
 }
 
   render(){
+    const loggedIn = this.props.currentUser && this.props.currentUser.id
     return(
       <nav className="header">
-        {(this.props.currentUser && this.props.currentUser.id) ?   <Link>
-          </Link>
-        : <Link></Link>}
-
-        <Link to="/"><img className="small-logo" src={window.images.logo} /></Link>
-        {(this.props.currentUser && this.props.currentUser.id) ? this.personalGreeting() : this.sessionLinks()}
+        <Link className="add-new-restaurant"></Link>
+        <Link to="/">
+          <img className="small-logo" src={window.images.logo} />
+        </Link>
+        {(loggedIn) ? this.personalGreeting() : this.sessionLinks()}
       </nav>
     );
   };

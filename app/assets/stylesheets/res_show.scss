@@ -11,8 +11,12 @@
   margin-bottom: -18px;
   z-index: 1;
   position: relative;
-  width: 85%;
+  width: 990px;
   margin: auto;
+}
+
+.map-potos {
+  width: 990px;
 }
 
 #map{
@@ -125,6 +129,8 @@
 
 .midcontent {
   background: white;
+  width: 990px;
+  margin: auto;
 }
 
 .midcontent > div > div > h3 {

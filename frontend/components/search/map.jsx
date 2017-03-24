@@ -15,12 +15,21 @@ class RestaurantMap extends React.Component {
     });
     this.geocoder = new google.maps.Geocoder();
     this.MarkerManager = new MarkerManager(this.map);
-    this.codeAddress(this.props.zip, this.map, this.MarkerManager, this.geocoder, this.props.restaurants, this.props.latlng);
-
+    this.codeAddress(this.props.zip,
+                     this.map,
+                     this.MarkerManager,
+                     this.geocoder,
+                     this.props.restaurants,
+                     this.props.latlng);
   }
 
   componentWillUpdate(nextProps){
-    this.codeAddress(nextProps.zip, this.map, this.MarkerManager, this.geocoder, nextProps.restaurants, nextProps.latlng);
+    this.codeAddress(nextProps.zip,
+                     this.map,
+                     this.MarkerManager,
+                     this.geocoder,
+                     nextProps.restaurants,
+                     nextProps.latlng);
   }
 
   codeAddress(address, map, MarkerManager, geocoder, restaurants, latlng) {
@@ -28,8 +37,7 @@ class RestaurantMap extends React.Component {
       map.setCenter(new google.maps.LatLng(latlng.lat, latlng.lng));
       MarkerManager.updateMarkers(restaurants);
     } else {
-
-      geocoder.geocode( { 'address': address}, function(results, status) {
+      geocoder.geocode( { 'address': address }, (results, status) => {
         if (status == google.maps.GeocoderStatus.OK) {
           let lat = results[0].geometry.location.lat();
           let lng = results[0].geometry.location.lng();
@@ -38,14 +46,11 @@ class RestaurantMap extends React.Component {
         }
       });
     }
-
   }
-
 
   render(){
     return(<div id='map-container' ref={ map => this.mapNode = map }></div>);
   }
-
 }
 
 export default RestaurantMap;

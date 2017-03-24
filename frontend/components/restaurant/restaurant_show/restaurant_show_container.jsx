@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { showRestaurant } from '../../../actions/restaurant_actions';
 import RestaurantShow from './restaurant_show';
 
-const mapStateToProps = (state, { location }) => {
+const mapStateToProps = (state) => {
   return({
     restaurant: state.restaurant,
     errors: state.errors,

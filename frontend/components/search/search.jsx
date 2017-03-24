@@ -11,7 +11,8 @@ class SearchPage extends React.Component {
   }
 
   componentWillMount(){
-    if(!this.props.params.zip && !this.props.params.types && !this.props.params.features.length){
+    const params = this.props.params;
+    if(!params.zip && !params.types && !params.features.length){
       this.props.fetchSearchRestaurants("", [], "")
     }
   }
@@ -24,16 +25,24 @@ class SearchPage extends React.Component {
     } else {
       res_index = <RestaurantIndex restaurants={this.props.results} />
     }
-    return(<div>
-      <div className="top-search">
-        <SearchForm params={this.props.params} fetchSearchRestaurants={ this.props.fetchSearchRestaurants } />
-      </div>
+    return(
+      <div>
+        <div className="top-search">
+          <SearchForm
+            params={this.props.params}
+            fetchSearchRestaurants={ this.props.fetchSearchRestaurants }
+          />
+        </div>
 
-      <div className="main-search">
-        {res_index}
-        <RestaurantMap restaurants={this.props.results} zip={ zip } latlng={ this.props.latlng } />
-      </div>
-    </div>);
+        <div className="main-search">
+          {res_index}
+          <RestaurantMap
+            restaurants={this.props.results}
+            zip={ zip }
+            latlng={ this.props.latlng }
+          />
+        </div>
+      </div>);
   }
 }
 
