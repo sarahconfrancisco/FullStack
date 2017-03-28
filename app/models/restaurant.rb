@@ -44,11 +44,11 @@ class Restaurant < ActiveRecord::Base
   has_many :restaurant_types
   has_many :types, through: :restaurant_types
   has_many :reviews
-  has_attached_file :image_1, default_url: 'empty_restaurant.jpg'
+  has_attached_file :image_1, default_url: 'breakfast.jpg'
   validates_attachment_content_type :image_1, content_type: /\Aimage\/.*\Z/
-  has_attached_file :image_2, default_url: 'full-bar.jpg'
+  has_attached_file :image_2, default_url: 'lunch.jpg'
   validates_attachment_content_type :image_2, content_type: /\Aimage\/.*\Z/
-  has_attached_file :image_3, default_url: 'pasta.jpg'
+  has_attached_file :image_3, default_url: 'dinner.jpg'
   validates_attachment_content_type :image_3, content_type: /\Aimage\/.*\Z/
   # after_initialize :geocode, :reverse_geocode, :ensure_hours
   # geocoded_by :full_address
