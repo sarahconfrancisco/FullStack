@@ -11,7 +11,7 @@ class ReviewForm extends React.Component {
       body: "",
       date: "",
       rating: null,
-      user: props.currentUser
+      user: {}
     };
   }
 
@@ -35,6 +35,8 @@ class ReviewForm extends React.Component {
       let review = {
         body: this.state.body,
         rating: this.state.rating,
+				user_id: this.props.currentUser.id,
+				restaurant_id: this.props.params.restaurantId
       }
       if (this.state.user.id){
         review.id = parseInt(this.state.id);
