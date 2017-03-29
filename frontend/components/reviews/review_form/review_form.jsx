@@ -38,7 +38,7 @@ class ReviewForm extends React.Component {
 				user_id: this.props.currentUser.id,
 				restaurant_id: this.props.params.restaurantId
       }
-      if (this.state.user.id){
+      if (this.state.id){
         review.id = parseInt(this.state.id);
         this.props.editReview(review)
       } else {
