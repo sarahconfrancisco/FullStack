@@ -25,7 +25,7 @@ class Api::ReviewsController < ApplicationController
     @review = Review.find_by(user_id: params[:user_id],
                              restaurant_id: params[:restaurant_id])
     @review = Review.new unless @review
-    @user = @review.user || { id: nil, fname: '', lname: '', zip: '' }
+    @user = User.find(params[:user_id])
   end
 
   def index

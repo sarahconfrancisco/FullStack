@@ -11,7 +11,7 @@ class ReviewForm extends React.Component {
       body: "",
       date: "",
       rating: null,
-      user: {}
+      user: props.currentUser
     };
   }
 
