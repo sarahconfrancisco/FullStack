@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :current_user, :logged_in?, :calculate_rating, :dd_id
+  helper_method :current_user, :logged_in?
 
   private
 
@@ -14,7 +14,6 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    return nil unless session[:session_token]
     @current_user ||= User.find_by_token(session[:session_token])
   end
 

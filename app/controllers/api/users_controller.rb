@@ -13,6 +13,6 @@ class Api::UsersController < ApplicationController
 
   def user_params
     params.require(:user)
-          .permit(:email, :password, :birthday, :fname, :lname, :zip, :session_token)
+          .permit(:email, :password, :birthday, :fname, :lname, :zip)
   end
 end
