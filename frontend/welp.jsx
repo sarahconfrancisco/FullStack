@@ -6,7 +6,7 @@ import configureStore from './store/store';
 document.addEventListener("DOMContentLoaded", () => {
   let store;
   if (window.currentUser){
-    preloadedState = {currentUser: window.currentUser};
+    let preloadedState = {currentUser: window.currentUser};
 		store = configureStore(preloadedState);
   } else {
 		store = configureStore();
