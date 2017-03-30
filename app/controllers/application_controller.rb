@@ -14,13 +14,14 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
+		debugger
     @current_user ||= User.find_by_token(session[:session_token])
   end
 
   def logout
-    current_user.reset_token!
+    current_user.reset_token! if logged_in?
+		@current_user = nil
     session[:session_token] = nil
-    @current_user = nil
   end
 
   def require_login
