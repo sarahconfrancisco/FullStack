@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
     resources :restaurants, only: [:create, :show, :update, :index]
     resources :reviews, only: [:create, :show, :update, :index]
+		resources :images, except: [:new, :edit]
   end
   root "static_pages#root"
 
