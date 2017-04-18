@@ -9,6 +9,8 @@ import RestaurantFormContainer from './restaurant/restaurant_form/restaurant_for
 import RestaurantShowContainer from './restaurant/restaurant_show/restaurant_show_container';
 import ReviewFormContainer from './reviews/review_form/review_form_container';
 import SearchContainer from './search/search_container';
+import ImageFormContainer from './image/new_image_container';
+import ImageIndexContainer from './image/image_index_container';
 
 const Root = (props) => {
 
@@ -20,9 +22,10 @@ const Root = (props) => {
           <Route path="/login" component={SessionFormContainer} />
           <Route path="/signup" component={SessionFormContainer} />
           <Route path="/addrestaurant" component={RestaurantFormContainer} />
-          <Route path="/restaurant/:restaurantId" component={RestaurantShowContainer}>
-          </Route>
+          <Route path="/restaurant/:restaurantId" component={RestaurantShowContainer} />
           <Route path="/newreview/:restaurantId" component={ReviewFormContainer} />
+          <Route path="/newimage/:restaurantId" component={ImageFormContainer} />
+          <Route path="/imageindex/:restaurantId" component={ImageIndexContainer} />
         </Route>
       </Router>
     </Provider>
