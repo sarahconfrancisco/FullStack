@@ -2,12 +2,16 @@ import React from 'react';
 import { Link } from 'react-router';
 import Star from '../star';
 
-const RestaurantIndexItem = ({ restaurant }) => {
+const RestaurantIndexItem = ({ loading, restaurant }) => {
+  if(loading || !restaurant.types){
+      return(<div></div>);
+  }
   const stars = [1,2,3,4,5].map((idx) => <Star
                                         rating={restaurant.rating}
                                         key={idx} index={idx}
                                         name='smallest-star' />)
   const price = "$".repeat(parseInt(restaurant.price));
+  console.log(restaurant)
   const typeArray = restaurant.types.join(", ").split(" ");
   const types = typeArray.map((type) => <a key={type}>{type} </a>);
 

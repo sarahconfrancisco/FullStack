@@ -14,7 +14,7 @@ const mapStateToProps = ({ currentUser, search, loading }) => {
   params: search.params,
   userZip: userZip,
   latlng: search.latlng,
-  loading: loading.searchLoading
+  loading: loading.imageLoading || loading.restaurantLoading || loading.searchLoading
 
 }};
 

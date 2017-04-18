@@ -23,7 +23,7 @@ class SearchPage extends React.Component {
     if(this.props.loading){
       res_index = <LoadingIcon />
     } else {
-      res_index = <RestaurantIndex restaurants={this.props.results} />
+      res_index = <RestaurantIndex loading={this.props.loading} restaurants={this.props.results} />
     }
     return(
       <div>
