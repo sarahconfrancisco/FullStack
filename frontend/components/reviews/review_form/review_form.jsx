@@ -81,7 +81,7 @@ class ReviewForm extends React.Component {
     return(
       <div className="review-form">
         <h3>Write a Review</h3>
-        <RestaurantIndexItem restaurant={this.props.restaurant} />
+        <RestaurantIndexItem loading={this.props.loading} restaurant={this.props.restaurant} />
         <label>Your Review</label>
         <div className="review-input">
           <div className='review-rating'>
