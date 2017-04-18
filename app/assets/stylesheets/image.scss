@@ -1,0 +1,33 @@
+.new-image {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 20px auto;
+}
+
+.image-submit {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.image-submit > button {
+    width: 120px;
+    margin: auto 0;
+}
+
+.image-submit > a {
+    margin: auto 0;
+}
+
+.user-photos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.image-index {
+    margin: 20px auto;
+    width: 935px;
+}
