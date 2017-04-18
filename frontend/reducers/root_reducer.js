@@ -3,6 +3,7 @@ import SessionReducer from './session_reducer';
 import ErrorReducer from './error_reducer';
 import RestaurantReducer from './restaurant_reducer';
 import ReviewReducer from './review_reducer';
+import ImageReducer from './image_reducer';
 import SearchReducer from './search_reducer';
 import LoadingReducer from './loading_reducer';
 
@@ -12,7 +13,8 @@ const RootReducer = combineReducers({
   restaurant: RestaurantReducer,
   reviewIndex: ReviewReducer,
   search: SearchReducer,
-  loading: LoadingReducer
+  loading: LoadingReducer,
+  images: ImageReducer
 });
 
 export default RootReducer;
