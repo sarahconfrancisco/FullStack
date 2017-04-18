@@ -1,10 +1,8 @@
 class Api::ImagesController < ApplicationController
   def create
     @image = Image.new(image_params)
-    @image.user_id ||= current_user.id
-    @image.restaurant_id ||= params[:id]
     if @image.save!
-      @restaurant = Restaurant.show_page(@image.restaurant.id)
+      @restaurant = Restaurant.show_page(@image.restaurant_id)
       render 'api/restaurants/show'
     else
       render json: @image.errors.full_messages, status: 422
@@ -24,7 +22,7 @@ class Api::ImagesController < ApplicationController
   def show; end
 
   def index
-    @images = Images.find_by(restaurant_id: params[:restaurant_id])
+    @images = Image.where(restaurant_id: params[:restaurant_id])
   end
 
   def destroy; end
