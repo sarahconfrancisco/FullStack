@@ -49,7 +49,8 @@ class ResHeader extends React.Component {
           </Link>
         </button>
 
-        <button className="small-button grey-button">
+        <button className="small-button grey-button"
+            onClick={() => this.props.router.push(`/newimage/${this.props.id}`)}>
           <Link>
           <img src={window.images.add_photo_icon} className="photo-icon" />
             <span>
