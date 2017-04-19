@@ -56,12 +56,17 @@ class ImageForm extends React.Component {
         return(
           <div>
             <form className="new-image" onSubmit={ this.handleSubmit }>
-                <input onChange={ this.updatePhoto } type="file" />
-                <div className="image-submit">
-                    <button className="post-review-button" type="submit">
-                        <span>Save</span>
-                    </button>
-                    <Link to={`/restaurant/${this.state.restaurantId}`}>Cancel</Link>
+                <div className="new-image">
+                    <label className="medium-button">
+                        Browse Files
+                        <input className="hidden" onChange={ this.updatePhoto } type="file" />
+                    </label>
+                    <div className="image-submit">
+                      <button className="medium-button" type="submit">
+                          <span>Save</span>
+                      </button>
+                      <Link to={`/restaurant/${this.state.restaurantId}`}>Cancel</Link>
+                    </div>
                 </div>
             </form>
           </div>
