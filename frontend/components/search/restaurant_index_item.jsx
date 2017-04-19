@@ -11,7 +11,6 @@ const RestaurantIndexItem = ({ loading, restaurant }) => {
                                         key={idx} index={idx}
                                         name='smallest-star' />)
   const price = "$".repeat(parseInt(restaurant.price));
-  console.log(restaurant)
   const typeArray = restaurant.types.join(", ").split(" ");
   const types = typeArray.map((type) => <a key={type}>{type} </a>);
 
