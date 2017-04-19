@@ -1,13 +1,13 @@
 .new-image {
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 200px;
     margin: 20px auto;
 }
 
 .image-submit {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 100%;
     margin: 10px 0;
 }

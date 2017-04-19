@@ -43,10 +43,16 @@
   background-color: #ed0008;
   background: linear-gradient(#ed0008, #dd1600);
   border: 1px solid #8d0005;
+  border-radius: 4px;
   width: 160px;
   height: 36px;
+  display: flex;
+  align-items: center;
   justify-content: center;
   margin: auto;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
 }
 
 .medium-button > a {
