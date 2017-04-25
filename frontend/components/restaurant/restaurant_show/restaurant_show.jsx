@@ -49,12 +49,14 @@ class RestaurantShow extends React.Component {
                 state={this.props.restaurant.city}
                 zip={this.props.restaurant.zip} />
             </div>
-            <ul className="res-photos">
-              <li><div className="photo-container"><img src={this.props.restaurant.image_1_url}/></div></li>
-              <li><div className="photo-container"><img src={this.props.restaurant.image_2_url}/></div></li>
-              <li><div className="photo-container"><img src={this.props.restaurant.image_3_url}/></div></li>
-            </ul>
-            <Link to={`/imageindex/${this.props.restaurant.id}`}>Customer Photos</Link>
+            <div className="res-photos-link">
+                <ul className="res-photos">
+                  <li><div className="photo-container"><img src={this.props.restaurant.image_1_url}/></div></li>
+                  <li><div className="photo-container"><img src={this.props.restaurant.image_2_url}/></div></li>
+                  <li><div className="photo-container"><img src={this.props.restaurant.image_3_url}/></div></li>
+                </ul>
+                <Link to={`/imageindex/${this.props.restaurant.id}`}>Customer Photos</Link>
+            </div>
           </div>
         </div>
         <div className="midcontent">

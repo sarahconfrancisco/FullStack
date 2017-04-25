@@ -162,7 +162,11 @@
   height: 250px;
 }
 
-
+.res-photos-link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
 
 .photo-container:hover > img {
   transition-duration: 100ms;
