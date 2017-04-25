@@ -54,7 +54,7 @@ class RestaurantShow extends React.Component {
               <li><div className="photo-container"><img src={this.props.restaurant.image_2_url}/></div></li>
               <li><div className="photo-container"><img src={this.props.restaurant.image_3_url}/></div></li>
             </ul>
-            <Link to={`/imageindex/${this.props.restaurant.id}`}>User Photos</Link>
+            <Link to={`/imageindex/${this.props.restaurant.id}`}>Customer Photos</Link>
           </div>
         </div>
         <div className="midcontent">
