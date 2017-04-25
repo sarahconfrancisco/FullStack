@@ -22,7 +22,7 @@ class Api::ImagesController < ApplicationController
   def show; end
 
   def index
-    @images = Image.where(restaurant_id: params[:restaurant_id])
+    @images = Image.where(restaurant_id: params[:restaurant_id]).to_a
   end
 
   def destroy; end
