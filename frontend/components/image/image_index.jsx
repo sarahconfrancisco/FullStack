@@ -24,17 +24,24 @@ class ImageIndex extends React.Component {
         for(let key in this.props.images){
           images.unshift(this.props.images[key]);
         }
-        const imageItems = images.map((image, index) => {
-          return(
-            <li key={index}>
-                <ImageIndexItem image={image} />
-            </li>);
-        });
+        let imageItems;
+        if(images.length == 0){
+            imageItems = (<li>
+                            <h2>No Customer Has Uploaded a Photo Yet!</h2>
+                        </li>);
+        } else{
+            imageItems = images.map((image, index) => {
+              return(
+                <li key={index}>
+                    <ImageIndexItem image={image} />
+                </li>);
+            });
+        }
 
         return(
             <div className="image-index">
               <div>
-                  <h1>User Uploaded Photos For:</h1>
+                  <h1>Customer Uploaded Photos For:</h1>
                   <RestaurantIndexItem loading={this.props.loading} restaurant={this.props.restaurant} />
                   <button className="medium-button"
                       onClick={() => this.props.router.push(`/newimage/${this.props.restaurant.id}`)}>
