@@ -44,6 +44,7 @@ class Restaurant < ActiveRecord::Base
   has_many :restaurant_types
   has_many :types, through: :restaurant_types
   has_many :reviews
+  has_many :images
   has_attached_file :image_1, default_url: 'breakfast.jpg'
   validates_attachment_content_type :image_1, content_type: /\Aimage\/.*\Z/
   has_attached_file :image_2, default_url: 'lunch.jpg'
